@@ -28,16 +28,16 @@ skills 位于 `skills/<name>/`，是 `npx skills` 默认扫描的位置。将仓
 
 ```bash
 # 列出可安装的 skills
-npx skills add <owner>/asa-skills --list
+npx skills add hhubb22/asa-skills --list
 
 # 安装到当前项目（交互选择 skill 与目标 Agent）
-npx skills add <owner>/asa-skills
+npx skills add hhubb22/asa-skills
 
 # 安装全部到用户级目录，指定 Agent
-npx skills add <owner>/asa-skills --skill '*' -g -a codex -a cursor
+npx skills add hhubb22/asa-skills --skill '*' -g -a codex -a cursor
 
 # 只装部分
-npx skills add <owner>/asa-skills --skill research --skill code-review
+npx skills add hhubb22/asa-skills --skill research --skill code-review
 ```
 
 也可以从本地检出安装，便于改完立即试用：

@@ -52,15 +52,15 @@ def tree_hashes(root: Path) -> dict[str, str]:
     return result
 
 
-def catalog(root: Path = ROOT) -> dict:
-    return json.loads((root / "catalog.json").read_text(encoding="utf-8"))
+def skill_names(root: Path = ROOT) -> list[str]:
+    """Every skills/<name>/SKILL.md directory; the filesystem is the only catalog."""
+    return sorted(p.parent.name for p in (root / "skills").glob("*/SKILL.md"))
 
 
 def generated_files(root: Path = ROOT) -> dict[Path, bytes]:
     lock = json.loads((root / "upstream.lock.json").read_text(encoding="utf-8"))
     generated: dict[Path, bytes] = {}
-    for item in catalog(root)["skills"]:
-        name = item["name"]
+    for name in skill_names(root):
         target = root / "skills" / name
         generated[target / "references" / "operating-contract.md"] = (
             root / "shared" / "operating-contract.md").read_bytes()
@@ -69,7 +69,7 @@ def generated_files(root: Path = ROOT) -> dict[Path, bytes]:
                 root / "shared" / "technical-writing.md").read_bytes()
         generated[target / "LICENSE"] = (root / "LICENSE").read_bytes()
         rows = ["# Sources", "", "此文件由 tools/sync_shared.py 生成。正文为本地改版，参考源不代表运行时依赖。", ""]
-        for src in lock["skills"][name]:
+        for src in lock["skills"].get(name, []):
             rows += [f"- `{src['repository']}/{src['path']}`", f"  - Git blob: `{src['git_blob_sha']}`",
                      f"  - Source: {src['content_url']}", f"  - Change: {src['relation']}"]
         rows += ["", "使用 MIT 许可，作者声明见同目录 LICENSE。", ""]
@@ -79,14 +79,12 @@ def generated_files(root: Path = ROOT) -> dict[Path, bytes]:
 
 def check(root: Path = ROOT) -> tuple[list[str], dict]:
     errors: list[str] = []
-    info = catalog(root)
-    actual = sorted(p.parent.name for p in (root / "skills").glob("*/SKILL.md"))
-    expected = sorted(x["name"] for x in info["skills"])
-    if actual != expected or len(set(expected)) != len(expected):
-        errors.append("Catalog and skill directories differ or contain duplicates")
-    stats = {"skills": len(actual), "skill_lines": {}, "description_characters": 0}
-    for item in info["skills"]:
-        name = item["name"]
+    names = skill_names(root)
+    lock = json.loads((root / "upstream.lock.json").read_text(encoding="utf-8"))
+    for stale in sorted(set(lock["skills"]) - set(names)):
+        errors.append(f"upstream.lock.json lists a skill that no longer exists: {stale}")
+    stats = {"skills": len(names), "skill_lines": {}, "description_characters": 0}
+    for name in names:
         if not NAME_RE.fullmatch(name) or len(name) > 64:
             errors.append(f"Invalid skill name: {name}")
             continue
@@ -101,8 +99,6 @@ def check(root: Path = ROOT) -> tuple[list[str], dict]:
                 errors.append(f"Invalid description length: {name}")
             if len(desc) > 200:
                 errors.append(f"Description exceeds this library's 200-character budget: {name}")
-            if desc != item["description"]:
-                errors.append(f"Catalog description drift: {name}")
             if set(meta) - {"name", "description", "license", "compatibility"}:
                 errors.append(f"Unexpected host-specific field: {name}")
             if len(meta.get("compatibility", "")) > 500:
@@ -119,7 +115,7 @@ def check(root: Path = ROOT) -> tuple[list[str], dict]:
         if not path.exists() or path.read_bytes() != data:
             errors.append(f"Generated file drift: {path.relative_to(root)}")
     for path in root.rglob("*.md"):
-        if any(x in {".local", "__pycache__", "dist", ".git"} for x in path.parts):
+        if any(x in {".local", "__pycache__", ".git"} for x in path.parts):
             continue
         text = path.read_text(encoding="utf-8")
         for link in LINK_RE.findall(text):
@@ -134,7 +130,7 @@ def check(root: Path = ROOT) -> tuple[list[str], dict]:
                 if not target.is_relative_to(own_skill):
                     errors.append(f"Non-portable skill reference: {path.relative_to(root)} -> {link}")
     for path in root.rglob("*.py"):
-        if any(x in {".local", "dist", ".git"} for x in path.parts):
+        if any(x in {".local", ".git"} for x in path.parts):
             continue
         try:
             compile(path.read_text(encoding="utf-8"), str(path), "exec")

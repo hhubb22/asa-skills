@@ -12,7 +12,7 @@
 
 SKILL.md 是行为指令，不是安全沙箱。只读需求必须结合宿主文件/命令权限实施；本包不更改这些权限，也不把全套工具权限写进 frontmatter。
 
-核心使用标准 name/description/license/compatibility 字段，不依赖某一宿主的 disable-model-invocation。catalog 中 preferred_invocation 是说明性信息，不是运行时权限开关。work、wait-what 和维护等能力通过明确用户意图触发，避免与日常工作争抢。
+核心使用标准 name/description/license/compatibility 字段，不依赖某一宿主的 disable-model-invocation。没有独立目录文件；description 就是触发说明，宿主与 `npx skills` 都直接读取它。work、wait-what 和维护等能力通过明确用户意图触发，避免与日常工作争抢。
 
 ## 文档寿命
 
@@ -22,4 +22,4 @@ SKILL.md 是行为指令，不是安全沙箱。只读需求必须结合宿主�
 
 skill-doctor 从有出处的任务记录判断是否该改，允许删除规则和不修改。不会把调用频率当质量。收集器只接受显式文件，未知格式报告跳过；它不偷偷调用云端判分。
 
-流程说明可以独立使用；脚本仅提供可机械执行的文件收集、安装、检查和评测准备。行为评价由真实模型/宿主的运行记录支持，不把关键词路由模拟包装成模型测评。
+流程说明可以独立使用；脚本仅提供可机械执行的文件收集、共享同步、结构检查和评测准备，安装与分发交给 `npx skills` 和 Git。行为评价由真实模型/宿主的运行记录支持，不把关键词路由模拟包装成模型测评。

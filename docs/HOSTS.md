@@ -12,18 +12,18 @@
 
 ## 调用与权限分开
 
-核心不使用 disable-model-invocation、mode 或 allowed-tools 等宿主差异较大的行为配置。catalog.json 的 preferred_invocation 仅表达设计意图，宿主不会自动执行它。不要把可自动发现误当成允许自动发送、发布或修改已批准语义。
+核心不使用 disable-model-invocation、mode 或 allowed-tools 等宿主差异较大的行为配置。哪些能力偏向显式调用只写在各自 SKILL.md 正文里，宿主不会自动执行它。不要把可自动发现误当成允许自动发送、发布或修改已批准语义。
 
-同名来源可能并存，不能假定合并或覆盖顺序。安装前检查宿主列表；只安装一个实际采用的版本。叶子能力可以直接使用，work 只按当前请求选路。
+同名来源可能并存，不能假定合并或覆盖顺序。安装前用 `npx skills list` 检查已装项；只安装一个实际采用的版本。叶子能力可以直接使用，work 只按当前请求选路。
 
 当前宿主明确将某项能力限制为只能手动调用时，路由器给出建议或请用户显式调用，不绕过限制。不存在统一 Skill API 时使用宿主支持的发现和文件读取，不编造工具。
 
 ## 本地与远端
 
-本机用户级目录不自动同步到 SSH、云 Agent 或自托管工作节点。需要时在目标环境中安装完整目录，或明确提交项目级 skills。Cursor 的云同步另有目录和授权规则，不能假定 ~/.agents/skills 自动上云。
+本机用户级目录不自动同步到 SSH、云 Agent 或自托管工作节点。需要时在目标环境中重新执行 `npx skills add`，或明确提交项目级 skills。Cursor 的云同步另有目录和授权规则，不能假定 ~/.agents/skills 自动上云。
 
 ## 环境要求
 
 标准 Markdown 正文可供任何遵循该格式的 Agent 读取，但本版只核对了上表三种宿主的文档。其他客户端应先确认目录和加载行为；不宣称已验证。
 
-Python 工具要求 3.10+，无外部依赖。此次实际执行环境为 Linux/Python 3.13；未在 macOS 和其他 Python 版本中执行。文件权限在 POSIX 环境下验证；本版不承诺 Windows 的权限隔离效果。
+Python 维护工具要求 3.10+，无外部依赖；安装本身只需要 Node.js 以运行 `npx skills`。维护工具已在 Linux/Python 3.13 与 macOS/Python 3 下执行；未在其他 Python 版本中执行。收集器的文件权限在 POSIX 环境下验证；本版不承诺 Windows 的权限隔离效果。

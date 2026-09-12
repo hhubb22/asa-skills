@@ -6,17 +6,13 @@ import stat
 import sys
 import tempfile
 import unittest
-from unittest import mock
-import zipfile
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import library
-import install
 import check_docs
 import prepare_eval
-import build_release
 
 spec = importlib.util.spec_from_file_location("collector", ROOT / "skills/skill-doctor/scripts/collect_sessions.py")
 collector = importlib.util.module_from_spec(spec)
@@ -39,7 +35,7 @@ class TemporaryCase(unittest.TestCase):
 
     def clone(self):
         target = self.base / "source"
-        shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns("__pycache__", ".local", "dist", "MANIFEST.sha256"))
+        shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns("__pycache__", ".local", ".git"))
         return target
 
 
@@ -93,103 +89,32 @@ class LibraryTests(TemporaryCase):
 
     def test_source_identifiers_are_blob_hashes(self):
         lock = json.loads((ROOT / "upstream.lock.json").read_text())
-        self.assertEqual(set(lock["skills"]), {x["name"] for x in library.catalog()["skills"]})
+        self.assertEqual(set(lock["skills"]), set(library.skill_names()))
         for entries in lock["skills"].values():
             for item in entries:
                 self.assertRegex(item["git_blob_sha"], r"^[0-9a-f]{40}$")
                 self.assertIn("/git/blobs/", item["content_url"])
 
+    def test_stale_lock_entry_is_detected(self):
+        clone = self.clone()
+        shutil.rmtree(clone / "skills/wait-what")
+        errors, stats = library.check(clone)
+        self.assertEqual(stats["skills"], 10)
+        self.assertTrue(any("no longer exists: wait-what" in x for x in errors))
 
-class InstallerTests(TemporaryCase):
-    def test_dry_run_does_not_create_destination(self):
-        dest = self.base / "not-created/skills"
-        self.assertEqual(install.install(dest, ["work"]), [("work", "install")])
-        self.assertFalse(dest.exists())
-
-    def test_apply_and_idempotence(self):
-        dest = self.base / "skills"
-        install.install(dest, ["wait-what"], apply=True)
-        self.assertTrue((dest / "wait-what/SKILL.md").is_file())
-        self.assertEqual(install.install(dest, ["wait-what"], apply=True), [("wait-what", "skip")])
-        self.assertFalse((dest / install.LOCK).exists())
-
-    def test_unmanaged_conflict_prevents_all_writes(self):
-        dest = self.base / "skills"
-        self.write("skills/wait-what/SKILL.md", "user content")
-        with self.assertRaisesRegex(ValueError, "Unmanaged"):
-            install.install(dest, ["work", "wait-what"], apply=True)
-        self.assertFalse((dest / "work").exists())
-        self.assertEqual((dest / "wait-what/SKILL.md").read_text(), "user content")
-
-    def test_local_modification_is_preserved(self):
-        dest = self.base / "skills"
-        install.install(dest, ["work"], apply=True)
-        self.write("skills/work/user-notes.md", "do not remove")
-        with self.assertRaisesRegex(ValueError, "Locally changed"):
-            install.install(dest, ["work"], apply=True, update=True)
-        self.assertEqual((dest / "work/user-notes.md").read_text(), "do not remove")
-
-    def test_update_requires_flag_and_retains_backup(self):
-        source = self.clone()
-        dest = self.base / "installed"
-        install.install(dest, ["work"], apply=True, root=source)
-        before = (dest / "work/SKILL.md").read_bytes()
-        p = source / "skills/work/SKILL.md"
-        p.write_bytes(before + b"\nLocal candidate revision.\n")
-        with self.assertRaisesRegex(ValueError, "--update"):
-            install.install(dest, ["work"], apply=True, root=source)
-        install.install(dest, ["work"], apply=True, update=True, root=source)
-        backups = list((self.base / ".asa-skills-backups").glob("*/work/SKILL.md"))
-        self.assertEqual(len(backups), 1)
-        self.assertEqual(backups[0].read_bytes(), before)
-        self.assertEqual((dest / "work/SKILL.md").read_bytes(), p.read_bytes())
-
-    def test_symlink_target_is_rejected(self):
-        dest = self.base / "skills"
-        dest.mkdir()
-        other = self.base / "other"
-        other.mkdir()
-        (dest / "work").symlink_to(other, target_is_directory=True)
-        with self.assertRaisesRegex(ValueError, "symlink"):
-            install.install(dest, ["work"], apply=True)
-
-    def test_symlink_destination_is_rejected(self):
-        other = self.base / "other"
-        other.mkdir()
-        dest = self.base / "skills"
-        dest.symlink_to(other, target_is_directory=True)
-        with self.assertRaisesRegex(ValueError, "symlink"):
-            install.install(dest, ["work"], apply=True)
-
-    def test_duplicate_or_unknown_name_is_rejected(self):
-        for names in [["work", "work"], ["../escape"], ["not-a-skill"]]:
-            with self.assertRaises(ValueError):
-                install.install(self.base / "skills", names, apply=True)
-
-    def test_transaction_failure_rolls_back(self):
-        source = self.clone()
-        dest = self.base / "installed"
-        install.install(dest, ["work"], apply=True, root=source)
-        before = library.tree_hashes(dest)
-        p = source / "skills/work/SKILL.md"
-        p.write_text(p.read_text() + "\nCandidate\n")
-        with mock.patch.object(install.os, "replace", side_effect=OSError("simulated manifest failure")):
-            with self.assertRaises(OSError):
-                install.install(dest, ["work", "wait-what"], apply=True, update=True, root=source)
-        self.assertEqual(library.tree_hashes(dest), before)
-
-    def test_malformed_manifest_is_rejected(self):
-        self.write("skills/" + install.MARKER, "[]")
-        with self.assertRaisesRegex(ValueError, "Unrecognized"):
-            install.install(self.base / "skills", ["work"], apply=True)
-        self.assertFalse((self.base / "skills/work").exists())
-
-    def test_install_lock_is_respected(self):
-        self.write("skills/" + install.LOCK, "locked")
-        with self.assertRaises(FileExistsError):
-            install.install(self.base / "skills", ["work"], apply=True)
-        self.assertTrue((self.base / "skills" / install.LOCK).exists())
-        self.assertFalse((self.base / "skills/work").exists())
+    def test_new_skill_without_lock_entry_is_accepted(self):
+        clone = self.clone()
+        skill = clone / "skills/new-skill"
+        skill.mkdir()
+        (skill / "SKILL.md").write_text('---\nname: new-skill\ndescription: "本地新增。"\nlicense: MIT\n---\n\n# New\n', encoding="utf-8")
+        for path, data in library.generated_files(clone).items():
+            if path.is_relative_to(skill):
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+        errors, stats = library.check(clone)
+        self.assertEqual(errors, [])
+        self.assertEqual(stats["skills"], 12)
+        self.assertIn("# Sources", (skill / "SOURCES.md").read_text(encoding="utf-8"))
 
 
 class CollectorTests(TemporaryCase):
@@ -369,28 +294,6 @@ class EvaluationTests(TemporaryCase):
     def test_no_matching_case_is_an_error(self):
         with self.assertRaises(ValueError):
             prepare_eval.prepare(self.base / "eval", case_id="missing")
-
-
-class ReleaseTests(TemporaryCase):
-    def test_output_cannot_be_archived_into_itself(self):
-        clone = self.clone()
-        with self.assertRaisesRegex(ValueError, "under dist"):
-            build_release.build(clone / "other-output", clone)
-
-    def test_archive_is_reproducible_and_manifest_matches(self):
-        import hashlib
-        clone = self.clone()
-        archive, digest_a = build_release.build(self.base / "out", clone)
-        _, digest_b = build_release.build(self.base / "out", clone)
-        self.assertEqual(digest_a, digest_b)
-        with zipfile.ZipFile(archive) as package:
-            self.assertIsNone(package.testzip())
-            self.assertFalse(any("__pycache__" in name for name in package.namelist()))
-            root = "asa-skills-v0.1.0/"
-            manifest = package.read(root + "MANIFEST.sha256").decode()
-            for row in manifest.splitlines():
-                expected, relative = row.split("  ", 1)
-                self.assertEqual(hashlib.sha256(package.read(root + relative)).hexdigest(), expected)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,132 @@
+{
+  "format_version": 1,
+  "reviewed_on": "2026-09-12",
+  "note": "git_blob_sha 标识实际参考文本；不是 commit SHA。observed_heads 是制作时另行读取的默认分支头，不断言所有参考 blob 均来自该头。没有复制上游完整正文或脚本。",
+  "observed_heads": {
+    "warpdotdev/common-skills": "b811c24365ae505bfc9646458957b886e29110b5",
+    "mattpocock/skills": "3cca18b368ae95cdbdebbff572ccafa662551015"
+  },
+  "skills": {
+    "work": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/ask-matt/SKILL.md",
+        "git_blob_sha": "ae8eb9b211972d9ae584b41d0f1439c644494fc7",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/ae8eb9b211972d9ae584b41d0f1439c644494fc7",
+        "relation": "路由用途；全部中文重写，不采用上游主流水线"
+      }
+    ],
+    "write-product-spec": [
+      {
+        "repository": "warpdotdev/common-skills",
+        "path": ".agents/skills/write-product-spec/SKILL.md",
+        "git_blob_sha": "1cd870f461a908a5ad4c621932869059c3ecda4a",
+        "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/1cd870f461a908a5ad4c621932869059c3ecda4a",
+        "relation": "行为与实现分离；重新编写输出与授权规则"
+      }
+    ],
+    "write-tech-spec": [
+      {
+        "repository": "warpdotdev/common-skills",
+        "path": ".agents/skills/write-tech-spec/SKILL.md",
+        "git_blob_sha": "97f25997de25830258a655eec8054e23367746a6",
+        "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/97f25997de25830258a655eec8054e23367746a6",
+        "relation": "代码证据、设计变化与验证；移除固定并行编排"
+      }
+    ],
+    "implement-specs": [
+      {
+        "repository": "warpdotdev/common-skills",
+        "path": ".agents/skills/implement-specs/SKILL.md",
+        "git_blob_sha": "459339bebbaf54fff6bfca19597c9070cf8b4bb9",
+        "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/459339bebbaf54fff6bfca19597c9070cf8b4bb9",
+        "relation": "已批准范围内实施与同步；解除固定文件前提"
+      }
+    ],
+    "research": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/research/SKILL.md",
+        "git_blob_sha": "fecee97e9457ba039678d2fcf1b1bc9fca78307d",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/fecee97e9457ba039678d2fcf1b1bc9fca78307d",
+        "relation": "一手资料与引用；不要求后台 Agent"
+      }
+    ],
+    "code-review": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/code-review/SKILL.md",
+        "git_blob_sha": "e28d7acbf7b3bb4d7817b7eb5d9c105af03f6ec4",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/e28d7acbf7b3bb4d7817b7eb5d9c105af03f6ec4",
+        "relation": "两条检查路径；重写差异范围、发现标准与权限"
+      }
+    ],
+    "wait-what": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/productivity/wait-what/SKILL.md",
+        "git_blob_sha": "f8854f1b4527bca90378baf5430557172136a1bf",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/f8854f1b4527bca90378baf5430557172136a1bf",
+        "relation": "主动纠偏；扩展事实与推断核对，不只简化措辞"
+      }
+    ],
+    "domain-modeling": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/domain-modeling/SKILL.md",
+        "git_blob_sha": "9b97707e19ef1f590aada356f2b3f6bb881f91be",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/9b97707e19ef1f590aada356f2b3f6bb881f91be",
+        "relation": "术语与决策维护；保留别名、正式语义需确认"
+      }
+    ],
+    "handoff": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/productivity/handoff/SKILL.md",
+        "git_blob_sha": "2eb98a51b97bb5bac461a26ad14828eeac827909",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/2eb98a51b97bb5bac461a26ad14828eeac827909",
+        "relation": "引用产物的交接；补基线、工作区和授权说明"
+      }
+    ],
+    "to-questionnaire": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/productivity/to-questionnaire/SKILL.md",
+        "git_blob_sha": "dadd0c00d6a350acaa15bb9ca1b96b20ead684ca",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/dadd0c00d6a350acaa15bb9ca1b96b20ead684ca",
+        "relation": "向知情者获取信息；去固定提问回合与隐含落盘"
+      }
+    ],
+    "skill-doctor": [
+      {
+        "repository": "warpdotdev/common-skills",
+        "path": ".agents/skills/skill-doctor/SKILL.md",
+        "git_blob_sha": "9fd7d77d3b3944cbda2b09137001c25af08f598d",
+        "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/9fd7d77d3b3944cbda2b09137001c25af08f598d",
+        "relation": "证据驱动维护；收集器从零重写，不复制评分与营销报告"
+      },
+      {
+        "repository": "warpdotdev/common-skills",
+        "path": ".agents/skills/skill-doctor/references/skill-improvements.md",
+        "git_blob_sha": "bbf1dace5f5aa98c9b50fed71e436461f1661d4f",
+        "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/bbf1dace5f5aa98c9b50fed71e436461f1661d4f",
+        "relation": "最小规则修改与归因；补版本不确定与保留样本"
+      }
+    ]
+  },
+  "additional_influences": [
+    {
+      "repository": "rust-lang/rfcs",
+      "path": "0000-template.md",
+      "git_blob_sha": "fdc40810e8650710b95ac83ee3b9ed274c9ca3b3",
+      "content_url": "https://api.github.com/repos/rust-lang/rfcs/git/blobs/fdc40810e8650710b95ac83ee3b9ed274c9ca3b3",
+      "relation": "仅借鉴通过例子、取舍和未决问题论证；未复制模板正文"
+    },
+    {
+      "repository": "cursor/plugins",
+      "path": "pstack/skills/poteto-mode/SKILL.md",
+      "relation": "仅借鉴入口按任务选择方法的概念；未复制代码或正文，未固定该文件版本",
+      "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/SKILL.md"
+    }
+  ]
+}

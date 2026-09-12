@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0",
+  "date": "2026-09-12",
+  "environment": {
+    "os": "Linux",
+    "python": "3.13.5"
+  },
+  "structural_check": {
+    "status": "passed",
+    "skills": 11,
+    "skill_lines": {
+      "code-review": 31,
+      "domain-modeling": 29,
+      "handoff": 23,
+      "implement-specs": 33,
+      "research": 29,
+      "skill-doctor": 34,
+      "to-questionnaire": 21,
+      "wait-what": 17,
+      "work": 44,
+      "write-product-spec": 31,
+      "write-tech-spec": 33
+    },
+    "description_characters": 409
+  },
+  "yaml_parse": {
+    "parser": "PyYAML (validation environment only, not a runtime dependency)",
+    "skills_parsed": 11,
+    "status": "passed"
+  },
+  "unit_tests": {
+    "run": 47,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "status": "passed"
+  },
+  "live_model_evaluation": {
+    "runs": 0,
+    "status": "not_run"
+  },
+  "host_integration": {
+    "Codex": "documentation-checked; live-not-run",
+    "Pi": "documentation-checked; live-not-run",
+    "Cursor": "documentation-checked; live-not-run"
+  }
+}

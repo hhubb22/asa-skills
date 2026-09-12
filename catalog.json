@@ -1,0 +1,71 @@
+{
+  "version": "0.1.0",
+  "skills": [
+    {
+      "name": "code-review",
+      "description": "审查指定代码差异的正确性、项目约束和需求符合性；输出有依据的发现，不默认修复。",
+      "preferred_invocation": "task-match",
+      "path": "skills/code-review/SKILL.md"
+    },
+    {
+      "name": "domain-modeling",
+      "description": "澄清或维护项目术语、概念关系与重要决策记录；用于定义发生冲突或需要整理领域模型时。",
+      "preferred_invocation": "explicit-request",
+      "path": "skills/domain-modeling/SKILL.md"
+    },
+    {
+      "name": "handoff",
+      "description": "为切换会话、目录或 Agent 编写任务交接，保留状态、证据、授权与下一步。",
+      "preferred_invocation": "explicit-request",
+      "path": "skills/handoff/SKILL.md"
+    },
+    {
+      "name": "implement-specs",
+      "description": "实施已经明确并获准执行的设计，完成范围内的代码、必要验证与文档同步。",
+      "preferred_invocation": "task-match",
+      "path": "skills/implement-specs/SKILL.md"
+    },
+    {
+      "name": "research",
+      "description": "调查源码、标准或技术事实，给出一手证据、版本范围、推断及未解决的问题。",
+      "preferred_invocation": "task-match",
+      "path": "skills/research/SKILL.md"
+    },
+    {
+      "name": "skill-doctor",
+      "description": "复盘指定会话中的 skill 选用与执行问题，提出有证据的最小补丁和回归验证。",
+      "preferred_invocation": "explicit-request",
+      "path": "skills/skill-doctor/SKILL.md"
+    },
+    {
+      "name": "to-questionnaire",
+      "description": "将需要负责人或领域专家回答的问题整理为可转交的 Markdown 问卷。",
+      "preferred_invocation": "explicit-request",
+      "path": "skills/to-questionnaire/SKILL.md"
+    },
+    {
+      "name": "wait-what",
+      "description": "用户没理解当前说明或要求重新对齐时，补充背景、核查推断并修正误解。",
+      "preferred_invocation": "explicit-request",
+      "path": "skills/wait-what/SKILL.md"
+    },
+    {
+      "name": "work",
+      "description": "为跨步骤任务选择并衔接必要的 skills；用于不确定从哪里开始或需要统一推进的工作。",
+      "preferred_invocation": "explicit-request",
+      "path": "skills/work/SKILL.md"
+    },
+    {
+      "name": "write-product-spec",
+      "description": "编写或修订特性的外部行为规格；用于行为、边界或验收预期尚需明确的设计。",
+      "preferred_invocation": "task-match",
+      "path": "skills/write-product-spec/SKILL.md"
+    },
+    {
+      "name": "write-tech-spec",
+      "description": "基于现有代码编写或修订技术设计；用于跨模块变化或存在重要实现取舍的特性。",
+      "preferred_invocation": "task-match",
+      "path": "skills/write-tech-spec/SKILL.md"
+    }
+  ]
+}

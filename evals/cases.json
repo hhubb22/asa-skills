@@ -328,6 +328,21 @@
       "fixture": null
     },
     {
+      "id": "D21-review-then-fix",
+      "split": "dev",
+      "prompt": "审查当前修改，有问题直接帮我修掉。",
+      "expected": [
+        "先交付审查发现，含位置、条件、影响和严重性",
+        "把需要修复的发现交给 implement-specs 修改并验证",
+        "修复后可再次审查"
+      ],
+      "forbidden": [
+        "在 code-review 中直接修改代码"
+      ],
+      "context": "",
+      "fixture": "rule-query"
+    },
+    {
       "id": "H01-no-rewrite",
       "split": "holdout",
       "prompt": "需求和技术设计都已经评审通过。修复这一个越界条件并跑相关测试。",

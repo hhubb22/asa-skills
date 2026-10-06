@@ -19,7 +19,7 @@
 | `diagnose-bugs` | Matt diagnosing-bugs 改写；反馈回路优先，网络设备场景的回路清单 |
 | `lab-request` | 本库新增；为隔离的实验室写验证需求单（验证什么、怎样算通过、带回什么），判定回传结果；执行方式由执行者决定 |
 | `research` | Matt 一手证据方法；区分事实、推断和未知，不依赖后台 Agent |
-| `code-review` | Matt 双路径审查；明确基线与工作区覆盖，不默认改代码 |
+| `code-review` | Matt 双路径审查；明确基线与工作区覆盖，只审查；修复交给 implement-specs |
 | `wait-what` | Matt；暂停新增操作，重新对齐并纠正可能的误解 |
 | `domain-modeling` | Matt；维护术语与重要决定，保留标准/SDK/历史别名 |
 | `handoff` | Matt；引用已有产物，保留基线、证据和授权，不复制整段聊天 |
@@ -97,7 +97,7 @@ python3 -m unittest discover -s tests -v
 - [Astra 适配依据](docs/ASTRA-ALIGNMENT.md)
 - [skill-doctor 使用与隐私](docs/SKILL-DOCTOR.md)
 - [使用指南](docs/GUIDE.md)
-- [31 个行为试跑案例与触发测试](evals/README.md)
+- [32 个行为试跑案例与触发测试](evals/README.md)
 - [实际验证与尚未验证范围](docs/VALIDATION.md)
 
 本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi、Cursor 或 Claude Code 会话里做行为 A/B，也没有真实的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。

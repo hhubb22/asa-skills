@@ -32,7 +32,7 @@ v0.1 只提供选路表。面向缺少工作流经验的同事推广时，使用
 
 SKILL.md 是行为指令，不是安全沙箱。只读需求必须结合宿主文件/命令权限实施；本包不更改这些权限，也不把全套工具权限写进 frontmatter。
 
-核心使用标准 name/description/license/compatibility 字段，不依赖某一宿主的 disable-model-invocation。没有独立目录文件；description 就是触发说明，宿主与 `npx skills` 都直接读取它。work、align、to-tasks、handoff、wait-what、skill-doctor、write-tr 通过明确用户意图触发，避免与日常工作争抢。Codex 读取各自的 `agents/openai.yaml`（`policy.allow_implicit_invocation: false`）落实这一点；其他宿主是否读取该文件未逐一核验；不读取时，依靠 description 与正文说明。
+核心使用标准 name/description/license/compatibility 字段，不依赖某一宿主的 disable-model-invocation。没有独立目录文件；description 就是触发说明，宿主与 `npx skills` 都直接读取它。所有 skill 都允许宿主根据 description 自动选用，靠 description 写清使用时机来避免误触发。v0.2.0 曾给 7 个 skill 加 Codex 专用的 `agents/openai.yaml` 关闭隐式调用，但 Codex 会把这类 skill 从模型可见的列表中整个隐藏，导致 work 无法衔接 align、to-tasks 等能力；v0.2.4 移除了全部宿主专用文件。
 
 ## 文档寿命
 

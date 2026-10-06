@@ -1,5 +1,7 @@
 # 验证记录
 
+2026-10-06 第五次（Linux/Python 3.13.16）：v0.2.4 移除全部 `agents/openai.yaml`，所有 skill 只保留规范字段；触发测试扩展到 16 个 skill。`check.py` 与单元测试通过；仍未在真实宿主中运行。
+
 2026-10-06 第四次（Linux/Python 3.13.16）：v0.2.3 将 lab-request 收窄为验证需求单，移除执行约束。`check.py` 与单元测试通过；仍未在真实宿主中运行。
 
 2026-10-06 第三次（Linux/Python 3.13.16）：v0.2.2 移除 lab-runner，安全规则并入 lab-request 的请求单模板。`check.py` 对 16 个 skills 通过，单元测试全部通过。仍未在真实宿主中运行。

@@ -1,6 +1,0 @@
-interface:
-  display_name: "To tasks"
-  short_description: "把已确认的设计或 TR 的 AR 列表拆成可独立验证的任务，标明依赖和验证方式"
-
-policy:
-  allow_implicit_invocation: false

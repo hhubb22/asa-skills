@@ -1,6 +1,0 @@
-interface:
-  display_name: "Handoff"
-  short_description: "为切换会话、目录或 Agent 编写任务交接，保留状态、证据、授权与下一步"
-
-policy:
-  allow_implicit_invocation: false

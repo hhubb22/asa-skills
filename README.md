@@ -27,7 +27,7 @@
 | `skill-doctor` | Warp；最小有据改动，移除调用率评分，增加版本与保留样本核查 |
 | `write-tr` | 本库新增；按公司 TR1/TR2/TR3 模板起草评审文档，人填字段保留占位，工程文档按 SR/AR 追溯 |
 
-每个 skill 的 frontmatter `description` 就是它的触发说明；本仓库不维护另一份目录文件。`work`、`align`、`to-tasks`、`handoff`、`wait-what`、`skill-doctor`、`write-tr` 只在显式调用时使用，Codex 通过各自的 `agents/openai.yaml` 关闭隐式调用。具体上游路径、Git blob 标识和改动说明见 [upstream.lock.json](upstream.lock.json)；许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这不是上游官方分发包。
+每个 skill 的 frontmatter `description` 就是它的触发说明；本仓库不维护另一份目录文件。所有 skill 只使用 Agent Skills 规范中的标准字段，不附带宿主专用的配置文件；宿主根据 description 自动选用，也可以显式调用。具体上游路径、Git blob 标识和改动说明见 [upstream.lock.json](upstream.lock.json)；许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这不是上游官方分发包。
 
 ## 安装
 

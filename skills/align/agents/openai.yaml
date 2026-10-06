@@ -1,6 +1,0 @@
-interface:
-  display_name: "Align"
-  short_description: "开工前复述需求，列出 Agent 补充的假设和阻塞问题供用户确认"
-
-policy:
-  allow_implicit_invocation: false

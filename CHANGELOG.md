@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 — 2026-10-06
+
+- 移除全部 `agents/openai.yaml`。Codex 会把关闭隐式调用的 skill 从模型可见列表中隐藏，导致 work 无法衔接 align、to-tasks、handoff、wait-what、write-tr。现在所有 skill 只使用 Agent Skills 规范的标准字段。
+- work 与 align 的 description 收窄，减少自动触发时的误用。
+- 触发测试扩展到全部 16 个 skill，共 160 条。
+
 ## 0.2.3 — 2026-10-06
 
 能力边界收紧：每个 skill 只规定自己的产物和判断。

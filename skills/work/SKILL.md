@@ -1,6 +1,6 @@
 ---
 name: work
-description: "按主路径选择并衔接本库 skills；用于开始新特性、修 bug，或不确定下一步该用哪个 skill 时。"
+description: "按主路径选择并衔接本库 skills；用于想按完整流程推进一项工作，或不确定下一步该用哪个 skill 时。"
 license: MIT
 ---
 

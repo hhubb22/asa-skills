@@ -1,6 +1,0 @@
-interface:
-  display_name: "Skill doctor"
-  short_description: "复盘指定会话中的 skill 选用与执行问题，提出有证据的最小补丁和回归验证"
-
-policy:
-  allow_implicit_invocation: false

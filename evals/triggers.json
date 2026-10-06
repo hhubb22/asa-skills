@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "触发测试：检查宿主是否根据 description 自动选用 skill。should_trigger 为应当选用的说法，should_not_trigger 为看似相关但应选用其他能力或无需 skill 的近似说法（括号内为期望去向）。只覆盖允许隐式调用的 skill；显式调用的 skill 由 cases.json 覆盖。未运行，不含结果。",
+  "note": "触发测试：检查宿主是否根据 description 自动选用 skill。should_trigger 为应当选用的说法，should_not_trigger 为看似相关但应选用其他能力或无需 skill 的近似说法（括号内为期望去向）。未运行，不含结果。",
   "skills": {
     "code-review": {
       "should_trigger": [
@@ -144,6 +144,118 @@
         "设计一下测试策略（write-tech-spec）",
         "这个抓包里为什么没有 MKPDU？（diagnose-bugs）",
         "帮我写个 ssh 登录脚本（直接完成）"
+      ]
+    },
+    "work": {
+      "should_trigger": [
+        "这个特性从头到尾按流程推进吧",
+        "用完整工作流做这个需求",
+        "我不知道该从哪一步开始，帮我安排",
+        "这件事接下来该用哪个 skill？",
+        "按主路径把这个功能做完"
+      ],
+      "should_not_trigger": [
+        "这个函数为什么返回空？（diagnose-bugs）",
+        "帮我审查一下这个 MR（code-review）",
+        "把这个变量改个名（直接完成）",
+        "复述一下我的需求（align）",
+        "解释一下 RFC 里这一节（research）"
+      ]
+    },
+    "align": {
+      "should_trigger": [
+        "我要做一个新功能：订单按标签筛选，你先复述一下你的理解",
+        "这是 TR1 的内容，开始前先对齐一下需求",
+        "聊了这么多，你总结一下我到底要什么",
+        "开工前确认一下这个 issue 的范围和验收",
+        "新需求：uRPF 支持 strict 和 loose，先别写代码，确认理解"
+      ],
+      "should_not_trigger": [
+        "这个函数是干什么的？（research）",
+        "把这段代码改成异步（直接完成）",
+        "我没看懂你刚才的设计（wait-what）",
+        "根据 ALIGN.md 写行为规格（write-product-spec）",
+        "整理要问 PM 的问题（to-questionnaire）"
+      ]
+    },
+    "to-tasks": {
+      "should_trigger": [
+        "设计确认了，拆一下任务",
+        "这个特性太大，分成几个能独立验证的小任务",
+        "按 AR 汇总拆成任务清单",
+        "拆分一下，好几个人一起做",
+        "这活得分好几个会话做，帮我规划任务"
+      ],
+      "should_not_trigger": [
+        "开始做 T01（implement-specs）",
+        "今天的待办有哪些？（直接回答）",
+        "设计一下模块划分（write-tech-spec）",
+        "估一下工作量（直接回答）",
+        "写项目排期（直接完成）"
+      ]
+    },
+    "handoff": {
+      "should_trigger": [
+        "上下文快满了，写个交接，我换新会话继续",
+        "我要换到另一台机器继续，记录一下当前状态",
+        "把进度交给另一个 Agent 接手",
+        "明天接着做，先把现状整理成交接文件",
+        "切换会话前保存一下进展和下一步"
+      ],
+      "should_not_trigger": [
+        "写一份项目周报（直接完成）",
+        "总结一下这次会话聊了什么（直接回答）",
+        "生成 MR 描述（直接完成）",
+        "记录一下这个设计决策（domain-modeling）",
+        "更新任务清单的状态（to-tasks）"
+      ]
+    },
+    "wait-what": {
+      "should_trigger": [
+        "等等，你为什么要改这个接口？",
+        "我没看懂你刚才的方案",
+        "停一下，你是不是理解错了我的意思",
+        "先别继续，解释一下你在做什么",
+        "这跟我要的不一样，重新说明一下"
+      ],
+      "should_not_trigger": [
+        "解释一下这段代码（research）",
+        "这个 bug 为什么会出现？（diagnose-bugs）",
+        "把方案写成文档（write-tech-spec）",
+        "继续下一步（按当前任务继续）",
+        "开工前把需求复述一遍（align）"
+      ]
+    },
+    "skill-doctor": {
+      "should_trigger": [
+        "复盘一下这两个会话里 skill 为什么没触发",
+        "Agent 一直不按 align 的格式输出，帮我查原因",
+        "这个 skill 老是误触发，分析一下要怎么改",
+        "检查一下这次会话里 skill 的执行问题",
+        "根据这几个会话记录，给 skill 提个改进补丁"
+      ],
+      "should_not_trigger": [
+        "新写一个 skill（直接完成）",
+        "这段代码为什么报错？（diagnose-bugs）",
+        "审查这个 MR（code-review）",
+        "安装这个 skill 库（直接完成）",
+        "解释一下 skill 是什么（直接回答）"
+      ]
+    },
+    "write-tr": {
+      "should_trigger": [
+        "帮我起草 TR1 场景分析",
+        "根据 TECH.md 写 TR2 特性设计",
+        "准备 TR3 概要设计评审材料",
+        "这是评审意见，整理成评审结论清单",
+        "TR2 基线后接口改了，生成基线后变更记录"
+      ],
+      "should_not_trigger": [
+        "写行为规格（write-product-spec）",
+        "写技术设计（write-tech-spec）",
+        "写周报（直接完成）",
+        "整理会议纪要（直接完成）",
+        "写 README（直接完成）"
       ]
     }
   }

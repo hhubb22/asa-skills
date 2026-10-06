@@ -97,7 +97,7 @@ python3 -m unittest discover -s tests -v
 - [Astra 适配依据](docs/ASTRA-ALIGNMENT.md)
 - [skill-doctor 使用与隐私](docs/SKILL-DOCTOR.md)
 - [使用指南](docs/GUIDE.md)
-- [32 个行为试跑案例与触发测试](evals/README.md)
+- [33 个行为试跑案例与触发测试](evals/README.md)
 - [实际验证与尚未验证范围](docs/VALIDATION.md)
 
 本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi、Cursor 或 Claude Code 会话里做行为 A/B，也没有真实的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。

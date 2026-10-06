@@ -1,5 +1,7 @@
 # 验证记录
 
+2026-10-06 第三次（Linux/Python 3.13.16）：v0.2.2 移除 lab-runner，安全规则并入 lab-request 的请求单模板。`check.py` 对 16 个 skills 通过，单元测试全部通过。仍未在真实宿主中运行。
+
 2026-10-06 第二次（Linux/Python 3.13.16）：v0.2.0 新增 align、to-tasks、diagnose-bugs、lab-request、lab-runner，重写 work 主路径与共享约定。`check.py` 对 17 个 skills 通过，单元测试全部通过；测试改为从仓库推导 skill 数量，并新增触发测试格式检查。所有新 skill、新案例和触发测试均未在真实宿主中运行。
 
 2026-10-06（Linux/Python 3.13.16）：新增 write-tr 后，`check.py` 对 12 个 skills 通过，36 项单元测试通过；测试中的 skill 与案例数量随之更新，upstream.lock.json 改为允许没有上游记录的新增 skill。write-tr 没有在真实宿主中试跑。

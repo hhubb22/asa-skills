@@ -18,7 +18,6 @@
 | `implement-specs` | Warp；沿用已有明确依据，在授权范围内连续实施与验证 |
 | `diagnose-bugs` | Matt diagnosing-bugs 改写；反馈回路优先，网络设备场景的回路清单 |
 | `lab-request` | 本库新增；为隔离的实验室生成自包含请求单，接收回传结果 |
-| `lab-runner` | 本库新增；安装在实验室侧，按安全规则执行请求单并回传 |
 | `research` | Matt 一手证据方法；区分事实、推断和未知，不依赖后台 Agent |
 | `code-review` | Matt 双路径审查；明确基线与工作区覆盖，不默认改代码 |
 | `wait-what` | Matt；暂停新增操作，重新对齐并纠正可能的误解 |
@@ -46,9 +45,6 @@ npx skills add hhubb22/asa-skills --skill work --skill align --skill write-produ
 
 # 扩展：公司 TR 评审流程与隔离实验室（开发侧）
 npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
-
-# 实验室侧 Agent 只需要
-npx skills add hhubb22/asa-skills --skill lab-runner -g
 
 # 只装部分
 npx skills add hhubb22/asa-skills --skill research --skill code-review

@@ -10,7 +10,7 @@
 - **改出来的东西不敢用**：没有设计、没有验证，出了问题不知道从哪查。
 - **知道概念，落不了地**：听说过"先写规格再写代码"，但不知道每一步具体怎么做、什么时候可以跳过。
 
-这套 skills 把一条可执行的工作流拆成 14 个通用核心能力，另有 3 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
+这套 skills 把一条可执行的工作流拆成 14 个通用核心能力，另有 2 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
 
 ## 四个核心概念
 
@@ -52,7 +52,6 @@ align   write-product-spec  write-tech-spec  to-tasks  implement-specs  code-rev
 **团队约定**
 
 5. 确认长期文档的位置，默认 `specs/<特性>/`，与代码同一提交。产品仓库里新增文档目录需要团队认可。
-6. 需要上机验证的团队：准备一个能 SSH 到实验室设备的 Agent 环境，安装 `lab-runner`，并维护一份设备清单。
 
 ## 安装
 
@@ -65,9 +64,6 @@ npx skills add hhubb22/asa-skills --skill work --skill align --skill write-produ
 
 # 扩展：公司 TR 评审流程与隔离实验室（开发侧）
 npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
-
-# 实验室侧 Agent
-npx skills add hhubb22/asa-skills --skill lab-runner -g
 ```
 
 `-a` 后面换成你使用的 Agent。调用方式随宿主不同：Codex 用 `$work`，Cursor 用 `/work`，Pi 用 `/skill:work`，也可以直接用自然语言说"用 work 处理……"。装完后新开一个会话。
@@ -115,7 +111,7 @@ npx skills add hhubb22/asa-skills --skill lab-runner -g
 
 ```text
 用 lab-request 为 <验收项> 生成实验室请求单
-（把请求单交给实验室侧 Agent 执行，拿回结果后）
+（用你习惯的方式执行请求单：交给实验室里的 Agent、跑脚本或手动操作，拿回结果后）
 这是 LAB-<特性>-01 的回传结果：<粘贴>。判断是否通过
 ```
 
@@ -139,11 +135,11 @@ npx skills add hhubb22/asa-skills --skill lab-runner -g
 
 **和 TR 什么关系？** TR 是评审时点的快照。开发前它是输入，开发后以仓库里的文档为准；偏离通过 TR 的基线后变更记录回报。`write-tr` 可以从工程文档起草 TR。
 
-**开发环境连不上实验室怎么办？** 用 `lab-request` 生成自包含的请求单，复制给实验室侧的 Agent 执行，再把结果粘贴回来。实验室侧安装 `lab-runner`，由它负责设备安全规则。
+**开发环境连不上实验室怎么办？** 用 `lab-request` 生成自包含的请求单，写清测什么、怎么判断、带回什么，以及执行约束。用你方便的方式执行，再把结果粘贴回来判定。
 
 **支持哪些工具？** 遵循标准 SKILL.md 格式的 Agent 都能读取。已按文档核对 Codex、Pi、Cursor；其他工具请先试装。
 
-**效果有数据吗？** 还没有。仓库里有 31 个行为案例和 100 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
+**效果有数据吗？** 还没有。仓库里有 31 个行为案例和 90 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
 
 ## 推广分享大纲
 

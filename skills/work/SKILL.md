@@ -64,7 +64,6 @@ license: MIT
 | 整理术语、概念关系或重要决策 | `domain-modeling` |
 | 向知情者收集缺失的事实或决定 | `to-questionnaire` |
 | 复盘 Agent 行为或 skill 质量 | `skill-doctor` |
-| 在隔离环境执行请求单 | `lab-runner`，安装在该环境侧的 Agent |
 
 按宿主的 skill 发现功能定位能力；同名冲突时先确认采用的来源。缺少目标 skill 时说明缺失，并直接完成力所能及的部分。专项 skill 结束后回到用户，由用户决定下一步，或在已授权范围内按主路径继续。
 

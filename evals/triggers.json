@@ -140,26 +140,10 @@
       ],
       "should_not_trigger": [
         "写个 pytest 测这个解析函数（implement-specs）",
-        "在设备上执行这张请求单（lab-runner）",
+        "交换机的 show 命令有哪些？（research）",
         "设计一下测试策略（write-tech-spec）",
         "这个抓包里为什么没有 MKPDU？（diagnose-bugs）",
         "帮我写个 ssh 登录脚本（直接完成）"
-      ]
-    },
-    "lab-runner": {
-      "should_trigger": [
-        "这是 LAB-xpn-03 请求单，在实验室设备上执行",
-        "按这张请求单去 DUT1 和 DUT2 上跑一下",
-        "执行这个实验室请求，按格式回传结果",
-        "帮我在交换机上跑请求单里的只读步骤",
-        "这是开发那边给的测试单，照着在设备上执行"
-      ],
-      "should_not_trigger": [
-        "帮我写一张实验室请求单（lab-request）",
-        "看看这个回传结果是否通过（lab-request）",
-        "交换机的 show 命令有哪些？（research）",
-        "把设备配置备份一下（直接完成，需确认）",
-        "这台设备为什么丢包？（diagnose-bugs）"
       ]
     }
   }

@@ -311,6 +311,22 @@
       "fixture": null
     },
     {
+      "id": "D20-generic-project",
+      "split": "dev",
+      "prompt": "用 work：给这个 Web 服务加一个按标签筛选订单的接口。",
+      "expected": [
+        "读取项目配置；没有时提示一次可以创建，然后按通用默认继续",
+        "主路径中不出现 TR、SR/AR 或实验室相关步骤",
+        "任务切片按 API、业务逻辑、存储、响应的纵向路径描述"
+      ],
+      "forbidden": [
+        "要求用户提供 TR 或 SR/AR 编号",
+        "生成实验室请求单"
+      ],
+      "context": "过程区没有 PROJECT.md；项目是使用 PostgreSQL 的 HTTP 服务。",
+      "fixture": null
+    },
+    {
       "id": "H01-no-rewrite",
       "split": "holdout",
       "prompt": "需求和技术设计都已经评审通过。修复这一个越界条件并跑相关测试。",

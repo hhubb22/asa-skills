@@ -41,8 +41,14 @@ npx skills add hhubb22/asa-skills --list
 # 安装到当前项目（交互选择 skill 与目标 Agent）
 npx skills add hhubb22/asa-skills
 
-# 安装全部到用户级目录，指定 Agent
-npx skills add hhubb22/asa-skills --skill '*' -g -a codex -a cursor
+# 核心：任何项目都适用，安装到用户级目录并指定 Agent
+npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
+
+# 扩展：公司 TR 评审流程与隔离实验室（开发侧）
+npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
+
+# 实验室侧 Agent 只需要
+npx skills add hhubb22/asa-skills --skill lab-runner -g
 
 # 只装部分
 npx skills add hhubb22/asa-skills --skill research --skill code-review
@@ -55,6 +61,8 @@ npx skills add /path/to/asa-skills --skill work -g
 ```
 
 更新、查看与移除同样交给 CLI：`npx skills update`、`npx skills list`、`npx skills remove <name>`。CLI 默认以符号链接接入各 Agent 目录，`--copy` 改为独立复制。
+
+核心 skill 不绑定领域。项目差异写在过程区的项目配置 `PROJECT.md` 里，模板随 `work` 一起安装，PICOS 示例见 [examples/project-config-picos.md](examples/project-config-picos.md)。扩展 skill 只有在项目配置声明了对应内容时才进入主路径。
 
 每个 `skills/<name>/` 目录自包含：共享参考、模板与许可已包含在内，不能只复制 SKILL.md。只安装 work 不会自动安装它能选择的其他能力。已经从 Warp/Matt 或其他来源装过同名 skill 时先核对，不要同时保留两个版本后指望宿主自动合并。
 
@@ -93,7 +101,7 @@ python3 -m unittest discover -s tests -v
 - [Astra 适配依据](docs/ASTRA-ALIGNMENT.md)
 - [skill-doctor 使用与隐私](docs/SKILL-DOCTOR.md)
 - [使用指南](docs/GUIDE.md)
-- [30 个行为试跑案例与触发测试](evals/README.md)
+- [31 个行为试跑案例与触发测试](evals/README.md)
 - [实际验证与尚未验证范围](docs/VALIDATION.md)
 
 本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi、Cursor 或 Claude Code 会话里做行为 A/B，也没有真实的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。

@@ -55,7 +55,7 @@ TR 是评审时点的快照，通常早于实际开发，开发中会发生变�
 
 ## 编号
 
-SR 与 AR 编号使用模板规则；仓库中的 PRODUCT.md / TECH.md 用这些编号标注追溯关系：
+项目配置中写明的编号规则优先；没有写明时，SR 与 AR 编号使用模板规则；仓库中的 PRODUCT.md / TECH.md 用这些编号标注追溯关系：
 
 - SR：`SR.<IR编码>.<分类>.<NNN>`，分类取 FUNC、PERF、DFX、NM、TEST、SEC。
 - AR：`AR.<SR编码>.<进程缩写>.<NNN>`。

@@ -10,9 +10,9 @@
 - **改出来的东西不敢用**：没有设计、没有验证，出了问题不知道从哪查。
 - **知道概念，落不了地**：听说过"先写规格再写代码"，但不知道每一步具体怎么做、什么时候可以跳过。
 
-这套 skills 把一条可执行的工作流拆成 17 个小能力。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
+这套 skills 把一条可执行的工作流拆成 14 个通用核心能力，另有 3 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
 
-## 三个核心概念
+## 四个核心概念
 
 **1. 主路径**
 
@@ -36,19 +36,41 @@ align   write-product-spec  write-tech-spec  to-tasks  implement-specs  code-rev
 - 你说"实现"，Agent 才改代码，并且在范围内自己完成验证和修复。
 - 提交、推送、对外发消息、操作实验室设备，都需要你明确同意。
 
-## 安装
+**4. 项目配置**
 
-前提：Node.js，以及能访问 GitHub。
+核心 skill 不绑定任何领域。每个项目的差异，例如评审文档是什么、需求怎么编号、有没有隔离的验证环境，写在过程区的 `PROJECT.md` 里。没有这份文件时按通用默认工作。
+
+## 开始前准备
+
+**每位使用者**
+
+1. 准备环境：Node.js，能访问 GitHub 和 npm。在公司网络下先试一次安装。
+2. 安装核心 skill；做 PICOS 项目的同事再装扩展（命令见下）。
+3. 为当前项目创建 `~/.agents/work/<项目>/PROJECT.md`。模板在 `work` 的 assets 目录里；PICOS 项目可以直接复制仓库中的 [示例](../examples/project-config-picos.md)。
+4. （可选）把 `~/.agents/work/` 初始化为个人 Git 仓库，保留过程文件的历史。
+
+**团队约定**
+
+5. 确认长期文档的位置，默认 `specs/<特性>/`，与代码同一提交。产品仓库里新增文档目录需要团队认可。
+6. 需要上机验证的团队：准备一个能 SSH 到实验室设备的 Agent 环境，安装 `lab-runner`，并维护一份设备清单。
+
+## 安装
 
 ```bash
 # 查看全部能力
 npx skills add hhubb22/asa-skills --list
 
-# 全部安装到用户目录，指定你用的 Agent
-npx skills add hhubb22/asa-skills --skill '*' -g -a codex -a cursor
+# 核心：任何项目都适用
+npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
+
+# 扩展：公司 TR 评审流程与隔离实验室（开发侧）
+npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
+
+# 实验室侧 Agent
+npx skills add hhubb22/asa-skills --skill lab-runner -g
 ```
 
-调用方式随宿主不同：Codex 用 `$work`，Cursor 用 `/work`，Pi 用 `/skill:work`，也可以直接用自然语言说"用 work 处理……"。装完后新开一个会话。
+`-a` 后面换成你使用的 Agent。调用方式随宿主不同：Codex 用 `$work`，Cursor 用 `/work`，Pi 用 `/skill:work`，也可以直接用自然语言说"用 work 处理……"。装完后新开一个会话。
 
 ## 典型用法
 
@@ -121,7 +143,7 @@ npx skills add hhubb22/asa-skills --skill '*' -g -a codex -a cursor
 
 **支持哪些工具？** 遵循标准 SKILL.md 格式的 Agent 都能读取。已按文档核对 Codex、Pi、Cursor；其他工具请先试装。
 
-**效果有数据吗？** 还没有。仓库里有 30 个行为案例和 100 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
+**效果有数据吗？** 还没有。仓库里有 31 个行为案例和 100 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
 
 ## 推广分享大纲
 
@@ -131,9 +153,9 @@ npx skills add hhubb22/asa-skills --skill '*' -g -a codex -a cursor
 |---|---|---|
 | 3 分钟 | 问题 | 上面三类问题，请大家对号入座 |
 | 5 分钟 | 主路径 | 一张图讲清六步和跳过条件；强调"不是流水线" |
-| 5 分钟 | 三个概念 | 长期文档与过程文件分开；授权边界 |
+| 5 分钟 | 核心概念 | 长期文档与过程文件分开；授权边界；项目配置 |
 | 10 分钟 | 案例 | 用一个真实特性走一遍，见下 |
-| 4 分钟 | 安装与上手 | 现场安装，跑一次 `align` |
+| 4 分钟 | 安装与上手 | 现场安装，创建项目配置，跑一次 `align` |
 | 3 分钟 | 下一步 | 收集反馈；内部 skills 共享平台作为第二阶段 |
 
 ### 案例讲述框架

@@ -110,8 +110,8 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 **需要上机验证**
 
 ```text
-用 lab-request 为 <验收项> 生成实验室请求单
-（用你习惯的方式执行请求单：交给实验室里的 Agent、跑脚本或手动操作，拿回结果后）
+用 lab-request 为 <验收项> 生成实验室需求单
+（用你习惯的方式完成验证，拿回结果后）
 这是 LAB-<特性>-01 的回传结果：<粘贴>。判断是否通过
 ```
 
@@ -135,7 +135,7 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 
 **和 TR 什么关系？** TR 是评审时点的快照。开发前它是输入，开发后以仓库里的文档为准；偏离通过 TR 的基线后变更记录回报。`write-tr` 可以从工程文档起草 TR。
 
-**开发环境连不上实验室怎么办？** 用 `lab-request` 生成自包含的请求单，写清测什么、怎么判断、带回什么，以及执行约束。用你方便的方式执行，再把结果粘贴回来判定。
+**开发环境连不上实验室怎么办？** 用 `lab-request` 生成自包含的需求单，写清验证什么、怎样算通过、需要带回哪些证据。用你方便的方式执行，再把结果粘贴回来判定。
 
 **支持哪些工具？** 遵循标准 SKILL.md 格式的 Agent 都能读取。已按文档核对 Codex、Pi、Cursor；其他工具请先试装。
 
@@ -165,4 +165,4 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 5. **评审材料**：以实际实现为依据起草 TR，评审时 <效果>。
 6. **收获**：<时间、返工、质量方面的具体变化>。
 
-讲案例时展示真实产物：ALIGN.md 的假设表、PRODUCT.md 的一条行为要求、一张实验室请求单。产物比描述更有说服力。
+讲案例时展示真实产物：ALIGN.md 的假设表、PRODUCT.md 的一条行为要求、一张实验室需求单。产物比描述更有说服力。

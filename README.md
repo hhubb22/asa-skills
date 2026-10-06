@@ -17,7 +17,7 @@
 | `to-tasks` | Matt to-tickets 改写；纵向切片、依赖与验证方式，输出到过程区 |
 | `implement-specs` | Warp；沿用已有明确依据，在授权范围内连续实施与验证 |
 | `diagnose-bugs` | Matt diagnosing-bugs 改写；反馈回路优先，网络设备场景的回路清单 |
-| `lab-request` | 本库新增；为隔离的实验室生成自包含请求单，接收回传结果 |
+| `lab-request` | 本库新增；为隔离的实验室写验证需求单（验证什么、怎样算通过、带回什么），判定回传结果；执行方式由执行者决定 |
 | `research` | Matt 一手证据方法；区分事实、推断和未知，不依赖后台 Agent |
 | `code-review` | Matt 双路径审查；明确基线与工作区覆盖，不默认改代码 |
 | `wait-what` | Matt；暂停新增操作，重新对齐并纠正可能的误解 |

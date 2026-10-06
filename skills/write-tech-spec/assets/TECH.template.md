@@ -10,15 +10,15 @@ Basis: 需求来源和调查 commit；不能取得版本时说明
 
 ## Proposed changes
 
-说明相对现状的变化、职责与状态如何安排、为什么选择它，以及真实代价。接口或失败路径重要时展开，不机械填充全部专题。行为通过 R-01 等编号或已有需求段落引用。
+说明相对现状的变化、职责与状态如何安排、为什么选择它，以及真实代价。接口或失败路径重要时展开，不机械填充全部专题。行为通过 R-01 等编号或已有需求段落引用；有 TR2 时，设计条目标注所属 AR。
 
 ## Testing and validation
 
-| Requirement | Setup and observation | Failure condition | Status |
-|---|---|---|---|
-| R-01 | 实际测试或实验计划 | 什么结果不符合要求 | planned |
+| Requirement | Setup and observation | Failure condition | Where | Status |
+|---|---|---|---|---|
+| R-01 | 实际测试或实验计划 | 什么结果不符合要求 | 单元测试 / 回放 / 上机 | planned |
 
-没有 R 编号时引用原需求段落。已经执行才能写 passed/failed，并给结果依据。
+没有 R 编号时引用原需求段落。已经执行才能写 passed/failed，并给结果依据；上机结果引用实验室请求编号。
 
 ## Open questions
 

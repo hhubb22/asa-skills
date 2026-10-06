@@ -1,10 +1,10 @@
 {
   "format_version": 1,
-  "reviewed_on": "2026-09-12",
+  "reviewed_on": "2026-10-06",
   "note": "git_blob_sha 标识实际参考文本；不是 commit SHA。observed_heads 是制作时另行读取的默认分支头，不断言所有参考 blob 均来自该头。没有复制上游完整正文或脚本。",
   "observed_heads": {
     "warpdotdev/common-skills": "b811c24365ae505bfc9646458957b886e29110b5",
-    "mattpocock/skills": "3cca18b368ae95cdbdebbff572ccafa662551015"
+    "mattpocock/skills": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d"
   },
   "skills": {
     "work": [
@@ -14,6 +14,13 @@
         "git_blob_sha": "ae8eb9b211972d9ae584b41d0f1439c644494fc7",
         "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/ae8eb9b211972d9ae584b41d0f1439c644494fc7",
         "relation": "路由用途；全部中文重写，不采用上游主流水线"
+      },
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/ask-matt/SKILL.md",
+        "git_blob_sha": "8d38b2b2c961c0e2b131bdc8f3596e22a4744e6c",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/8d38b2b2c961c0e2b131bdc8f3596e22a4744e6c",
+        "relation": "主路径、分支判断与阶段边界的写法；中文重写，加入 TR 起点、快速验证与修 bug 路径"
       }
     ],
     "write-product-spec": [
@@ -111,6 +118,33 @@
         "git_blob_sha": "bbf1dace5f5aa98c9b50fed71e436461f1661d4f",
         "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/bbf1dace5f5aa98c9b50fed71e436461f1661d4f",
         "relation": "最小规则修改与归因；补版本不确定与保留样本"
+      }
+    ],
+    "align": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/productivity/grilling/SKILL.md",
+        "git_blob_sha": "8ca78c6d8f901aab0c5a1f896034b70e666ff2a3",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/8ca78c6d8f901aab0c5a1f896034b70e666ff2a3",
+        "relation": "分轮提问、附建议答案、事实自行查证；改为先结构化复述，问题只限阻塞下一份产物，最多 2 轮、每轮 5 个"
+      }
+    ],
+    "to-tasks": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/to-tickets/SKILL.md",
+        "git_blob_sha": "e868c831fcfb1e124e010bcdf84a429ec879160f",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/e868c831fcfb1e124e010bcdf84a429ec879160f",
+        "relation": "纵向切片、阻塞关系、expand–contract 与用户确认；去掉工单系统依赖，输出到过程区，以 AR 为起点并标注验证方式"
+      }
+    ],
+    "diagnose-bugs": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/diagnosing-bugs/SKILL.md",
+        "git_blob_sha": "1b929e29fb519c26b500d3eda744177986883ac8",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/1b929e29fb519c26b500d3eda744177986883ac8",
+        "relation": "反馈回路优先的分阶段调试；回路清单改为网络设备场景，增加实验室请求与密钥脱敏"
       }
     ]
   },

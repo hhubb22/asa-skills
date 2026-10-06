@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "note": "触发测试：检查宿主是否根据 description 自动选用 skill。should_trigger 为应当选用的说法，should_not_trigger 为看似相关但应选用其他能力或无需 skill 的近似说法（括号内为期望去向）。只覆盖允许隐式调用的 skill；显式调用的 skill 由 cases.json 覆盖。未运行，不含结果。",
+  "skills": {
+    "code-review": {
+      "should_trigger": [
+        "帮我看看这次改动有没有问题，准备提 MR 了",
+        "审查一下当前工作区的修改，包括没 add 的文件",
+        "这个分支和 master 的差异有没有并发问题？",
+        "提交前自查一下，重点看错误处理",
+        "按 TECH.md 检查实现有没有漏掉要求"
+      ],
+      "should_not_trigger": [
+        "帮我写一下这个 MR 的描述（直接完成）",
+        "修复 review 里提到的空指针问题（implement-specs）",
+        "解释一下这段代码在做什么（research）",
+        "这个函数为什么偶尔返回错误值？（diagnose-bugs）",
+        "把 README 里的错别字改掉（直接完成）"
+      ]
+    },
+    "domain-modeling": {
+      "should_trigger": [
+        "代码里 SA、SC、SAK 这几个词混着用，帮我理清楚",
+        "我们项目里的 session 和 context 到底是不是一个东西？",
+        "为选用 hostap 而不是自研 MKA 写一份 ADR",
+        "整理一下这个模块的术语表",
+        "标准里的 Key Server 和我们代码里的 kserver 对应关系是什么，记录下来"
+      ],
+      "should_not_trigger": [
+        "把这个变量名从 sak 改成 sa_key（直接完成）",
+        "MKA 协议里 Key Server 是怎么选出来的？（research）",
+        "帮我写这个特性的行为规格（write-product-spec）",
+        "这个设计里两个方案选哪个？（write-tech-spec）",
+        "给这个函数加注释（直接完成）"
+      ]
+    },
+    "implement-specs": {
+      "should_trigger": [
+        "TECH.md 已经确认了，开始写代码吧",
+        "按 TASKS.md 做 T03",
+        "照刚才定的方案实现，跑完测试告诉我",
+        "设计没问题，实现一下 AR 汇总里的前两条",
+        "把评审通过的接口改动落实到代码"
+      ],
+      "should_not_trigger": [
+        "这个需求怎么设计比较好？（write-tech-spec）",
+        "帮我拆一下任务（to-tasks）",
+        "先别写代码，帮我理解一下需求（align）",
+        "这个测试为什么失败？（diagnose-bugs）",
+        "看看这个 PR 有没有问题（code-review）"
+      ]
+    },
+    "research": {
+      "should_trigger": [
+        "802.1AEbw 里 XPN 的 salt 是怎么构造的？",
+        "查一下 FRR 里 uRPF 相关的代码在哪",
+        "hostap 现在支持 GCM-AES-XPN-256 吗？哪个版本开始的？",
+        "这个模块的配置是怎么一路下发到 SDK 的？",
+        "Linux 内核 macsec 的 replay window 是怎么实现的"
+      ],
+      "should_not_trigger": [
+        "帮我写个 Python 脚本解析这个日志（直接完成）",
+        "设计一下 uRPF 的进程间接口（write-tech-spec）",
+        "这个 bug 帮我定位一下（diagnose-bugs）",
+        "把这段英文翻译成中文（直接完成）",
+        "整理一下要问 SDK 团队的问题（to-questionnaire）"
+      ]
+    },
+    "to-questionnaire": {
+      "should_trigger": [
+        "lcmgr 接口的细节只有 SDK 团队知道，帮我整理要问他们的问题",
+        "我要找芯片厂商确认几件事，帮我写个问题清单",
+        "这些产品形态的问题得问 PM，整理成问卷",
+        "把需要测试组回答的问题列出来，我转给他们",
+        "整理一份给客户的需求确认问题"
+      ],
+      "should_not_trigger": [
+        "你有什么问题要问我的吗？（align）",
+        "帮我想想这个需求还缺什么（align）",
+        "给 SDK 团队发封邮件催一下进度（直接完成，需发送授权）",
+        "查一下 SDK 文档里有没有这个接口（research）",
+        "写一份 FAQ 文档（直接完成）"
+      ]
+    },
+    "write-product-spec": {
+      "should_trigger": [
+        "把 uRPF 的对外行为写成规格",
+        "这个 CLI 的行为、报错和默认值需要写清楚",
+        "根据 ALIGN.md 写 PRODUCT.md",
+        "定义一下 XPN 协商失败时设备应该怎么表现",
+        "TR1 的 SR 太粗了，帮我细化成可测试的行为规格"
+      ],
+      "should_not_trigger": [
+        "设计一下实现方案（write-tech-spec）",
+        "帮我写 TR1（write-tr）",
+        "写个 README（直接完成）",
+        "这个功能用户手册怎么写（直接完成）",
+        "复述一下我刚才说的需求（align）"
+      ]
+    },
+    "write-tech-spec": {
+      "should_trigger": [
+        "uRPF 需要改 FRR、lcmgr 和 SDK 三层，帮我出个设计",
+        "这个接口变更怎么设计比较好，写个 TECH.md",
+        "两种方案各有利弊，帮我写设计文档对比",
+        "根据 PRODUCT.md 写技术设计",
+        "进程间要新增一个消息，设计一下数据结构和时序"
+      ],
+      "should_not_trigger": [
+        "直接实现吧，方案已经定了（implement-specs）",
+        "写 TR2（write-tr）",
+        "这个函数怎么写更优雅（直接完成）",
+        "解释一下现在的架构（research）",
+        "记录一下为什么选这个方案（domain-modeling）"
+      ]
+    },
+    "diagnose-bugs": {
+      "should_trigger": [
+        "MKA 协商偶尔失败，帮我查一下",
+        "升级镜像后吞吐掉了一半",
+        "这个单测在 CI 上时好时坏",
+        "设备重启后 macsec 口不通了，什么原因？",
+        "debug 一下这个 core dump"
+      ],
+      "should_not_trigger": [
+        "这个功能要怎么测试？（write-tech-spec）",
+        "帮我审查一下这个修复（code-review）",
+        "为什么要用 XPN？（research）",
+        "编译报错：缺少分号（直接完成）",
+        "给这个模块补单元测试（implement-specs）"
+      ]
+    },
+    "lab-request": {
+      "should_trigger": [
+        "这个需要上机验证，帮我准备给实验室的测试步骤",
+        "我得去实验室抓个包，帮我写要执行的命令和预期",
+        "生成一张实验室请求单，验证 A2",
+        "这是实验室回传的结果，帮我看看是否通过",
+        "TR3 里的黑盒测试例需要在设备上跑，帮我整理成可执行的步骤"
+      ],
+      "should_not_trigger": [
+        "写个 pytest 测这个解析函数（implement-specs）",
+        "在设备上执行这张请求单（lab-runner）",
+        "设计一下测试策略（write-tech-spec）",
+        "这个抓包里为什么没有 MKPDU？（diagnose-bugs）",
+        "帮我写个 ssh 登录脚本（直接完成）"
+      ]
+    },
+    "lab-runner": {
+      "should_trigger": [
+        "这是 LAB-xpn-03 请求单，在实验室设备上执行",
+        "按这张请求单去 DUT1 和 DUT2 上跑一下",
+        "执行这个实验室请求，按格式回传结果",
+        "帮我在交换机上跑请求单里的只读步骤",
+        "这是开发那边给的测试单，照着在设备上执行"
+      ],
+      "should_not_trigger": [
+        "帮我写一张实验室请求单（lab-request）",
+        "看看这个回传结果是否通过（lab-request）",
+        "交换机的 show 命令有哪些？（research）",
+        "把设备配置备份一下（直接完成，需确认）",
+        "这台设备为什么丢包？（diagnose-bugs）"
+      ]
+    }
+  }
+}

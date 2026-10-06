@@ -12,7 +12,7 @@
 
 ## 调用与权限分开
 
-核心不使用 disable-model-invocation、mode 或 allowed-tools 等宿主差异较大的行为配置。哪些能力偏向显式调用只写在各自 SKILL.md 正文里，宿主不会自动执行它。不要把可自动发现误当成允许自动发送、发布或修改已批准语义。
+核心不使用 disable-model-invocation、mode 或 allowed-tools 等宿主差异较大的 frontmatter 字段。偏向显式调用的能力另带 `agents/openai.yaml`，以 `policy.allow_implicit_invocation: false` 让 Codex 只在显式调用时使用；该文件是 [OpenAI 文档](https://learn.chatgpt.com/docs/build-skills)中的可选元数据，其他宿主是否读取未核验。不要把可自动发现误当成允许自动发送、发布或修改已批准语义。
 
 同名来源可能并存，不能假定合并或覆盖顺序。安装前用 `npx skills list` 检查已装项；只安装一个实际采用的版本。叶子能力可以直接使用，work 只按当前请求选路。
 

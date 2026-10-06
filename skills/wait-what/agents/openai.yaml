@@ -1,0 +1,6 @@
+interface:
+  display_name: "Wait what"
+  short_description: "用户没理解当前说明或要求重新对齐时，暂停新增操作，补充背景、核查推断并修正误解。"
+
+policy:
+  allow_implicit_invocation: false

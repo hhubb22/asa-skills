@@ -1,6 +1,18 @@
-# v0.1 的设计选择
+# 设计选择
 
-12 个 skill 是可独立读取的能力，不是固定流水线。work 解决选择与衔接，叶子能力不回调 work；明确的小任务可直接完成。用户自然语言授权有效，调用 skill 本身不产生额外权限。
+17 个 skill 是可独立读取的能力。work 给出一条默认主路径，每一步都有跳过条件；叶子能力不回调 work，明确的小任务直接完成。用户自然语言授权有效，调用 skill 本身不产生额外权限。
+
+v0.1 只提供选路表。面向缺少工作流经验的同事推广时，使用者需要先看到"接下来做什么"，再谈灵活选择，因此 v0.2 参考 Matt 的 ask-matt 补上了主路径、快速验证、修 bug 路径和阶段边界。
+
+## 长期文档与过程文件
+
+长期文档（行为规格、技术设计、ADR、术语表）与代码一起提交，描述实际交付的行为。过程文件（对齐、任务清单、进度、交接、实验室请求、TR 草稿）放在产品仓库之外的过程区，默认 `~/.agents/work/<项目>/<特性>/`。这样做是为了适应提交管理不够规范、没有工单系统的大型仓库：过程文件不会被误提交，也不会随切换分支或清理工作区丢失。
+
+公司 TR 文档在飞书中、开发环境无法访问，且早于实际开发。TR 作为评审时点的快照：开发前作为输入，开发后以仓库中的工程文档为准，偏离通过基线后变更记录回报。工程文档比 SR/AR 更细，通过标注所属 SR/AR 追溯。
+
+## 实验室隔离
+
+开发环境无法直连实验室。lab-request 生成自包含的请求单，由用户转交实验室侧 Agent；lab-runner 在实验室侧负责设备清单、操作分级和脱敏。安全规则放在执行侧，因为请求单由另一个 Agent 生成，不能由它决定可以对共享设备做什么。
 
 ## 单独安装与一致性
 
@@ -12,7 +24,7 @@
 
 SKILL.md 是行为指令，不是安全沙箱。只读需求必须结合宿主文件/命令权限实施；本包不更改这些权限，也不把全套工具权限写进 frontmatter。
 
-核心使用标准 name/description/license/compatibility 字段，不依赖某一宿主的 disable-model-invocation。没有独立目录文件；description 就是触发说明，宿主与 `npx skills` 都直接读取它。work、wait-what 和维护等能力通过明确用户意图触发，避免与日常工作争抢。
+核心使用标准 name/description/license/compatibility 字段，不依赖某一宿主的 disable-model-invocation。没有独立目录文件；description 就是触发说明，宿主与 `npx skills` 都直接读取它。work、align、to-tasks、handoff、wait-what、skill-doctor、write-tr 通过明确用户意图触发，避免与日常工作争抢。Codex 读取各自的 `agents/openai.yaml`（`policy.allow_implicit_invocation: false`）落实这一点；其他宿主是否读取该文件未逐一核验；不读取时，依靠 description 与正文说明。
 
 ## 文档寿命
 

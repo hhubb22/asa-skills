@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write TR"
+  short_description: "按公司 TR1 场景分析、TR2 特性设计、TR3 概要设计模板起草飞书评审文档"
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Work"
+  short_description: "按主路径选择并衔接本库 skills"
+
+policy:
+  allow_implicit_invocation: false

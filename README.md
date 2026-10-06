@@ -1,6 +1,8 @@
 # Asa Skills
 
-一套独立维护、按任务选用的个人 Agent skills，通过 [`npx skills`](https://github.com/vercel-labs/skills) 安装与更新。以 Warp 与 Matt 的工作方法为参考，重新编写中文指令和配套材料；设计文档采用具体场景、真实取舍和可验证约定。没有固定的“需求 → 设计 → 实施”必经流水线。
+一套独立维护、按任务选用的个人 Agent skills，通过 [`npx skills`](https://github.com/vercel-labs/skills) 安装与更新。以 Warp 与 Matt 的工作方法为参考，重新编写中文指令和配套材料；设计文档采用具体场景、真实取舍和可验证约定。`work` 给出一条默认主路径（对齐 → 规格 → 设计 → 拆分 → 实施 → 审查），每一步都有跳过条件，不是必经流水线。
+
+第一次使用请看 [使用指南](docs/GUIDE.md)。
 
 **用户控制目标、范围和重大决定；Agent 在已有授权内完成必要工作。**work 提供统一入口，各专项 skill 也能独立使用。skill-doctor 根据真实记录提出改进，不自动改写正式规则。
 
@@ -8,10 +10,15 @@
 
 | Skill | 来源与改造 |
 |---|---|
-| `work` | Matt 导航与 pstack 入口思路；轻量选路、保留授权，不复制总流水线 |
+| `work` | Matt ask-matt 与 pstack 入口思路；主路径、快速验证与修 bug 路径，标明阶段边界 |
+| `align` | Matt grilling 改写；先结构化复述，问题只限阻塞项，最多 2 轮 |
 | `write-product-spec` | Warp；以可观察行为为核心，不编造需求或强制创建工单 |
 | `write-tech-spec` | Warp + Rust RFC 论述；先调查，再说明变化、取舍与验证 |
+| `to-tasks` | Matt to-tickets 改写；纵向切片、依赖与验证方式，输出到过程区 |
 | `implement-specs` | Warp；沿用已有明确依据，在授权范围内连续实施与验证 |
+| `diagnose-bugs` | Matt diagnosing-bugs 改写；反馈回路优先，网络设备场景的回路清单 |
+| `lab-request` | 本库新增；为隔离的实验室生成自包含请求单，接收回传结果 |
+| `lab-runner` | 本库新增；安装在实验室侧，按安全规则执行请求单并回传 |
 | `research` | Matt 一手证据方法；区分事实、推断和未知，不依赖后台 Agent |
 | `code-review` | Matt 双路径审查；明确基线与工作区覆盖，不默认改代码 |
 | `wait-what` | Matt；暂停新增操作，重新对齐并纠正可能的误解 |
@@ -19,9 +26,9 @@
 | `handoff` | Matt；引用已有产物，保留基线、证据和授权，不复制整段聊天 |
 | `to-questionnaire` | Matt；向真正的知情者收集事实与决定，不自动发送 |
 | `skill-doctor` | Warp；最小有据改动，移除调用率评分，增加版本与保留样本核查 |
-| `write-tr` | 本库新增；按公司 TR1/TR2/TR3 模板起草评审文档，人填字段保留占位，与工程文档共用 SR/AR 编号 |
+| `write-tr` | 本库新增；按公司 TR1/TR2/TR3 模板起草评审文档，人填字段保留占位，工程文档按 SR/AR 追溯 |
 
-每个 skill 的 frontmatter `description` 就是它的触发说明；本仓库不维护另一份目录文件。具体上游路径、Git blob 标识和改动说明见 [upstream.lock.json](upstream.lock.json)；许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这不是上游官方分发包。
+每个 skill 的 frontmatter `description` 就是它的触发说明；本仓库不维护另一份目录文件。`work`、`align`、`to-tasks`、`handoff`、`wait-what`、`skill-doctor`、`write-tr` 只在显式调用时使用，Codex 通过各自的 `agents/openai.yaml` 关闭隐式调用。具体上游路径、Git blob 标识和改动说明见 [upstream.lock.json](upstream.lock.json)；许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这不是上游官方分发包。
 
 ## 安装
 
@@ -85,7 +92,8 @@ python3 -m unittest discover -s tests -v
 
 - [Astra 适配依据](docs/ASTRA-ALIGNMENT.md)
 - [skill-doctor 使用与隐私](docs/SKILL-DOCTOR.md)
-- [24 个行为试跑案例](evals/README.md)
+- [使用指南](docs/GUIDE.md)
+- [30 个行为试跑案例与触发测试](evals/README.md)
 - [实际验证与尚未验证范围](docs/VALIDATION.md)
 
-本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi 或 Cursor 会话里做行为 A/B，也没有真实 Astra 的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。
+本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi、Cursor 或 Claude Code 会话里做行为 A/B，也没有真实的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。

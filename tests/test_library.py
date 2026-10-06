@@ -43,7 +43,7 @@ class LibraryTests(TemporaryCase):
     def test_all_skills_validate(self):
         errors, stats = library.check(ROOT)
         self.assertEqual(errors, [])
-        self.assertEqual(stats["skills"], 12)
+        self.assertEqual(stats["skills"], len(library.skill_names()))
         self.assertLessEqual(max(stats["skill_lines"].values()), 120)
 
     def test_standard_frontmatter(self):
@@ -99,7 +99,7 @@ class LibraryTests(TemporaryCase):
         clone = self.clone()
         shutil.rmtree(clone / "skills/wait-what")
         errors, stats = library.check(clone)
-        self.assertEqual(stats["skills"], 11)
+        self.assertEqual(stats["skills"], len(library.skill_names()) - 1)
         self.assertTrue(any("no longer exists: wait-what" in x for x in errors))
 
     def test_new_skill_without_lock_entry_is_accepted(self):
@@ -113,7 +113,7 @@ class LibraryTests(TemporaryCase):
                 path.write_bytes(data)
         errors, stats = library.check(clone)
         self.assertEqual(errors, [])
-        self.assertEqual(stats["skills"], 13)
+        self.assertEqual(stats["skills"], len(library.skill_names()) + 1)
         self.assertIn("# Sources", (skill / "SOURCES.md").read_text(encoding="utf-8"))
 
 
@@ -269,9 +269,19 @@ class DocumentTests(unittest.TestCase):
 class EvaluationTests(TemporaryCase):
     def test_cases_are_unique_and_split(self):
         cases = json.loads((ROOT / "evals/cases.json").read_text())["cases"]
-        self.assertEqual(len(cases), 24)
-        self.assertEqual(len({x["id"] for x in cases}), 24)
-        self.assertEqual(sum(x["split"] == "holdout" for x in cases), 9)
+        self.assertEqual(len(cases), 30)
+        self.assertEqual(len({x["id"] for x in cases}), 30)
+        self.assertEqual(sum(x["split"] == "holdout" for x in cases), 11)
+
+    def test_trigger_queries_cover_known_skills(self):
+        data = json.loads((ROOT / "evals/triggers.json").read_text())["skills"]
+        self.assertLessEqual(set(data), set(library.skill_names()))
+        queries = []
+        for name, item in data.items():
+            self.assertGreaterEqual(len(item["should_trigger"]), 5, name)
+            self.assertGreaterEqual(len(item["should_not_trigger"]), 5, name)
+            queries += item["should_trigger"] + item["should_not_trigger"]
+        self.assertEqual(len(queries), len(set(queries)))
 
     def test_preparation_has_no_model_results(self):
         out = self.base / "eval"

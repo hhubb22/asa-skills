@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased — 2026-10-06
+
+新增 write-tr：按公司 TR1 场景分析、TR2 特性设计、TR3 概要设计模板起草飞书评审文档。TR 视为评审时点快照：开发前作为工程文档的输入，开发后由仓库中的 PRODUCT/TECH 作为权威来源，偏离通过基线后变更记录回报。人填字段保留占位，SR/AR 编号与工程文档共用。work 路由表、README 与评测案例同步更新。
+
 ## Unreleased — 2026-09-13
 
 转为个人 Git 仓库，安装、更新与移除交给 `npx skills`。删除 tools/install.py、tools/build_release.py、Makefile、MANIFEST.sha256、VERSION、catalog.json 和 docs/TEST-RESULTS.json。

@@ -40,10 +40,10 @@ class TemporaryCase(unittest.TestCase):
 
 
 class LibraryTests(TemporaryCase):
-    def test_all_eleven_skills_validate(self):
+    def test_all_skills_validate(self):
         errors, stats = library.check(ROOT)
         self.assertEqual(errors, [])
-        self.assertEqual(stats["skills"], 11)
+        self.assertEqual(stats["skills"], 12)
         self.assertLessEqual(max(stats["skill_lines"].values()), 120)
 
     def test_standard_frontmatter(self):
@@ -89,7 +89,7 @@ class LibraryTests(TemporaryCase):
 
     def test_source_identifiers_are_blob_hashes(self):
         lock = json.loads((ROOT / "upstream.lock.json").read_text())
-        self.assertEqual(set(lock["skills"]), set(library.skill_names()))
+        self.assertLessEqual(set(lock["skills"]), set(library.skill_names()))
         for entries in lock["skills"].values():
             for item in entries:
                 self.assertRegex(item["git_blob_sha"], r"^[0-9a-f]{40}$")
@@ -99,7 +99,7 @@ class LibraryTests(TemporaryCase):
         clone = self.clone()
         shutil.rmtree(clone / "skills/wait-what")
         errors, stats = library.check(clone)
-        self.assertEqual(stats["skills"], 10)
+        self.assertEqual(stats["skills"], 11)
         self.assertTrue(any("no longer exists: wait-what" in x for x in errors))
 
     def test_new_skill_without_lock_entry_is_accepted(self):
@@ -113,7 +113,7 @@ class LibraryTests(TemporaryCase):
                 path.write_bytes(data)
         errors, stats = library.check(clone)
         self.assertEqual(errors, [])
-        self.assertEqual(stats["skills"], 12)
+        self.assertEqual(stats["skills"], 13)
         self.assertIn("# Sources", (skill / "SOURCES.md").read_text(encoding="utf-8"))
 
 
@@ -269,9 +269,9 @@ class DocumentTests(unittest.TestCase):
 class EvaluationTests(TemporaryCase):
     def test_cases_are_unique_and_split(self):
         cases = json.loads((ROOT / "evals/cases.json").read_text())["cases"]
-        self.assertEqual(len(cases), 22)
-        self.assertEqual(len({x["id"] for x in cases}), 22)
-        self.assertEqual(sum(x["split"] == "holdout" for x in cases), 8)
+        self.assertEqual(len(cases), 24)
+        self.assertEqual(len({x["id"] for x in cases}), 24)
+        self.assertEqual(sum(x["split"] == "holdout" for x in cases), 9)
 
     def test_preparation_has_no_model_results(self):
         out = self.base / "eval"

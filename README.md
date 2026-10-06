@@ -19,6 +19,7 @@
 | `handoff` | Matt；引用已有产物，保留基线、证据和授权，不复制整段聊天 |
 | `to-questionnaire` | Matt；向真正的知情者收集事实与决定，不自动发送 |
 | `skill-doctor` | Warp；最小有据改动，移除调用率评分，增加版本与保留样本核查 |
+| `write-tr` | 本库新增；按公司 TR1/TR2/TR3 模板起草评审文档，人填字段保留占位，与工程文档共用 SR/AR 编号 |
 
 每个 skill 的 frontmatter `description` 就是它的触发说明；本仓库不维护另一份目录文件。具体上游路径、Git blob 标识和改动说明见 [upstream.lock.json](upstream.lock.json)；许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这不是上游官方分发包。
 
@@ -84,7 +85,7 @@ python3 -m unittest discover -s tests -v
 
 - [Astra 适配依据](docs/ASTRA-ALIGNMENT.md)
 - [skill-doctor 使用与隐私](docs/SKILL-DOCTOR.md)
-- [22 个行为试跑案例](evals/README.md)
+- [24 个行为试跑案例](evals/README.md)
 - [实际验证与尚未验证范围](docs/VALIDATION.md)
 
 本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi 或 Cursor 会话里做行为 A/B，也没有真实 Astra 的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。

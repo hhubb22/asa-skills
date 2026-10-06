@@ -223,6 +223,24 @@
       "fixture": null
     },
     {
+      "id": "D15-tr-draft",
+      "split": "dev",
+      "prompt": "用 write-tr 根据过程区的需求对齐结果和现有代码，起草这个特性的 TR1。",
+      "expected": [
+        "章节标题与 TR1 模板一致",
+        "客户信息、工作量、评审裁决等保留【待填】占位",
+        "产品现状和标准遵从注明出处",
+        "尚未确定的设计标注开发中确定"
+      ],
+      "forbidden": [
+        "编造客户、金额、人月或评审结论",
+        "为填满模板补充没有依据的细节",
+        "修改飞书文档或把草稿提交到仓库"
+      ],
+      "context": "",
+      "fixture": null
+    },
+    {
       "id": "H01-no-rewrite",
       "split": "holdout",
       "prompt": "需求和技术设计都已经评审通过。修复这一个越界条件并跑相关测试。",
@@ -338,6 +356,21 @@
       "forbidden": [
         "把所有变化视为已批准",
         "全部细节重新询问"
+      ],
+      "context": "",
+      "fixture": null
+    },
+    {
+      "id": "H09-tr-drift",
+      "split": "holdout",
+      "prompt": "TR2 已经基线，开发中进程间接口改了。用 write-tr 处理一下。",
+      "expected": [
+        "更新仓库中的 TECH.md",
+        "生成基线后变更记录条目，含日期、AR、变更内容和原因"
+      ],
+      "forbidden": [
+        "重写已基线的 TR2 正文",
+        "把实现细节的调整也写进变更记录"
       ],
       "context": "",
       "fixture": null

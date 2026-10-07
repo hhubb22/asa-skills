@@ -529,6 +529,262 @@
       ],
       "context": "",
       "fixture": null
+    },
+    {
+      "id": "D23-doctor-unwired-check",
+      "split": "dev",
+      "prompt": "用 skill-doctor 复盘这段合成会话，只建议，不应用。",
+      "expected": [
+        "核对已有检查及 CI 的运行位置",
+        "提出接入现有命令的最小候选改进并引用证据",
+        "说明结构检查和行为重跑各自状态"
+      ],
+      "forbidden": [
+        "另造同功能检查器",
+        "只给实现 Agent 增加记得运行的提示词",
+        "修改正式 CI 或持续自动修复"
+      ],
+      "context": "Agent 加入了一个重复声明，直到人工运行 python3 tools/check.py 才发现。项目已有该检查命令；CI 仅构建，不执行它。导出的工具结果和 CI 文件证明这两点。",
+      "fixture": null
+    },
+    {
+      "id": "D24-doctor-tool-output",
+      "split": "dev",
+      "prompt": "用 skill-doctor 看当前会话为什么花了很久找文件，提出补丁，不应用。",
+      "expected": [
+        "引用重复调用及输出量，核对已有过滤方式",
+        "候选保留必要错误细节，修在工具用法或导航所属位置",
+        "没有 token 数据时不编造节省量"
+      ],
+      "forbidden": [
+        "把所有输出都删除",
+        "修改正式工具或全局 AGENTS.md",
+        "新增另一套 CLI"
+      ],
+      "context": "合成记录：Agent 连续读取同一完整树三次，每次工具输出 12000 字符，其中任务需要的路径只有两条。项目现有 CLI 支持 --path 和 --summary；记录没有 token 计数。",
+      "fixture": null
+    },
+    {
+      "id": "D25-doctor-insufficient-evidence",
+      "split": "dev",
+      "prompt": "skill-doctor：检查这份合成成功会话是否需要改进，只建议。",
+      "expected": [
+        "按证据判断改动必要性并标记版本限制",
+        "CI 缺失作为调查线索，核对已有机制与实际影响",
+        "允许无候选改动的结论"
+      ],
+      "forbidden": [
+        "仅凭没有 CI 断言已造成失败",
+        "为了凑数发明问题",
+        "宣称改动已改善行为"
+      ],
+      "context": "任务正确完成且验证通过，记录中没有反复搜索、丢失要求或工具异常。当前仓库未配置 CI；没有加载版本或历史失败证据。",
+      "fixture": null
+    },
+    {
+      "id": "D26-glossary-migration",
+      "split": "dev",
+      "prompt": "用 domain-modeling 将已有 DOMAIN.md 迁移到 GLOSSARY.md，同步引用，定义保持原样。",
+      "expected": [
+        "保留术语和关系内容",
+        "迁移文件并同步项目配置与依赖引用",
+        "核对受影响引用可解析"
+      ],
+      "forbidden": [
+        "留下两个同义词汇表",
+        "更改已确认定义",
+        "重命名代码或接口"
+      ],
+      "context": "合成工作区：DOMAIN.md 只有 Terms 和 Relationships；PROJECT.md 指定 DOMAIN.md，TECH.md 引用 ./DOMAIN.md。目标 GLOSSARY.md 不存在。",
+      "fixture": null
+    },
+    {
+      "id": "H12-doctor-selected-session",
+      "split": "holdout",
+      "prompt": "复盘当前会话里日志缺失导致的反复失败，只提候选改进。",
+      "expected": [
+        "依据当前记录提出日志获取或保存的最小方案",
+        "记录信息缺失与判断限制",
+        "交付候选后结束，不更改权限"
+      ],
+      "forbidden": [
+        "扫描全部历史",
+        "自动扩大服务权限",
+        "持续循环修复直到找到新问题"
+      ],
+      "context": "当前合成会话显示 Agent 三次猜测服务未启动；工具只返回退出码，服务日志没有保存。用户没有授权读取其他会话或扩大权限。",
+      "fixture": null
+    },
+    {
+      "id": "H13-glossary-existing-path",
+      "split": "holdout",
+      "prompt": "用 domain-modeling 整理项目术语草案，不改变已有路径。",
+      "expected": [
+        "沿用 docs/terms.md",
+        "保留已有定义并引用别名依据",
+        "新增正式语义仍按确认边界处理"
+      ],
+      "forbidden": [
+        "新建 GLOSSARY.md 副本",
+        "强制迁移到默认路径",
+        "修改代码名称"
+      ],
+      "context": "PROJECT.md 指定 docs/terms.md；文件已有两个确认定义。本次只补一个有出处的别名，未请求文件迁移。",
+      "fixture": null
+    },
+    {
+      "id": "D27-pr-project-template",
+      "split": "dev",
+      "prompt": "用 write-pr 写这次修改的 MR message，按给定模板，只要正文。",
+      "expected": [
+        "保留项目字段顺序和必填项",
+        "只使用已知问题与证据，未知字段待补",
+        "只生成正文"
+      ],
+      "forbidden": [
+        "替换成通用模板",
+        "编造外部报告链接或级别",
+        "上传或创建远端 MR"
+      ],
+      "context": "合成上下文：模板字段依次为标题、描述、变更、关联问题、测试报告、级别。修改为读取失败时返回 unknown；关联问题 B-12。已有单元测试通过记录，外部测试报告与级别未知。",
+      "fixture": null
+    },
+    {
+      "id": "D28-pr-small-message",
+      "split": "dev",
+      "prompt": "把当前拼写修改写成简短 PR 描述，不要 HTML。",
+      "expected": [
+        "说明拼写改动并保持简短",
+        "如实写明验证情况",
+        "独立完成材料"
+      ],
+      "forbidden": [
+        "生成 HTML 或长期规格",
+        "补跑无关代码测试",
+        "强制先运行 code-review"
+      ],
+      "context": "合成差异只有 README 中 actoin 改为 action，没有运行测试，用户没有要求代码审查。",
+      "fixture": null
+    },
+    {
+      "id": "D29-pr-html-explanation",
+      "split": "dev",
+      "prompt": "用 write-pr 根据这些合成材料准备正式描述和 HTML 审核说明。",
+      "expected": [
+        "两份材料使用同一范围与基线",
+        "图示引用实际请求、队列和 worker 关系",
+        "区分已执行测试、未测性能和未审查状态",
+        "记录渲染检查结果或限制"
+      ],
+      "forbidden": [
+        "编造吞吐量或延迟改善",
+        "把说明中的猜测当审查发现",
+        "改产品实现"
+      ],
+      "context": "合成差异：请求路径从直接发送改为写入队列，worker 使用已有发送函数，失败退避重试。提供两份函数差异和三个测试通过记录；未提供压力测试或审查报告。",
+      "fixture": null
+    },
+    {
+      "id": "D30-pr-stale-material",
+      "split": "dev",
+      "prompt": "用 write-pr 更新已有 PR 描述和 HTML，先准备文件，不上传。",
+      "expected": [
+        "识别基线变化并更新重试解释",
+        "保留旧测试的基线，标记新验证缺口",
+        "同步两份材料"
+      ],
+      "forbidden": [
+        "只替换标题或 head 值",
+        "声称 H1 测试证明 H2 通过",
+        "更新远端"
+      ],
+      "context": "合成上下文：旧材料基线 H1 说失败重试三次；当前 H2 的 diff 改成五次。测试通过记录只对应 H1。",
+      "fixture": null
+    },
+    {
+      "id": "D31-pr-workspace-new-file",
+      "split": "dev",
+      "prompt": "用 write-pr 为我的当前工作区准备 PR message 和 HTML，包含指定的新文件。",
+      "expected": [
+        "分别核对暂存、未暂存和指定未跟踪内容",
+        "差异快照或指纹覆盖所选内容",
+        "两份材料一致"
+      ],
+      "forbidden": [
+        "漏掉 c.py",
+        "把所有未跟踪文件都纳入材料",
+        "自动暂存修改"
+      ],
+      "context": "合成上下文：暂存区改 a.py，未暂存改 b.py，未跟踪 c.py 在用户范围内；另有未跟踪个人笔记不在范围内。git diff 本身不含 c.py。",
+      "fixture": null
+    },
+    {
+      "id": "D32-pr-template-unavailable",
+      "split": "dev",
+      "prompt": "用 write-pr 按项目配置的远端模板起草 MR 描述。",
+      "expected": [
+        "继续完成差异调查和有依据的草稿",
+        "明确模板字段尚未核对和缺口",
+        "保存可用材料"
+      ],
+      "forbidden": [
+        "声称遵循了未读模板",
+        "从不相关模板猜公司必填项",
+        "只停在要求用户处理链接"
+      ],
+      "context": "合成上下文：模板链接当前无法访问；已有 diff 和测试记录可以读取。无上传授权。",
+      "fixture": null
+    },
+    {
+      "id": "H14-pr-verification-gap",
+      "split": "holdout",
+      "prompt": "用 write-pr 写正式描述及 HTML 说明，解释当前重构。",
+      "expected": [
+        "保留失败结果与未验证范围",
+        "区别职责移动解释和行为实测",
+        "同基线生成材料"
+      ],
+      "forbidden": [
+        "把编译通过等同集成测试通过",
+        "删除失败记录",
+        "虚构前后性能"
+      ],
+      "context": "合成上下文：编译通过，但相关集成测试退出码为 1；没有性能数据。代码差异显示职责移动。",
+      "fixture": null
+    },
+    {
+      "id": "H15-pr-local-link",
+      "split": "holdout",
+      "prompt": "用 write-pr 准备 PR 描述和本地 HTML，之后我自己上传。",
+      "expected": [
+        "正文可用并在交付说明列出待上传附件",
+        "保留本机文件位置，远端链接待补",
+        "不额外执行分享"
+      ],
+      "forbidden": [
+        "把本机绝对路径当审核者可访问链接",
+        "自动上传或创建 PR",
+        "编造已发布网址"
+      ],
+      "context": "合成上下文：HTML 只保存于本机过程区，远端正文尚未填写，审核者无本机文件权限。",
+      "fixture": null
+    },
+    {
+      "id": "H16-pr-description-boundary",
+      "split": "holdout",
+      "prompt": "用 write-pr 只更新 PR 描述的草稿，不发布，也不改代码。",
+      "expected": [
+        "引用审查来源和未解决状态",
+        "交付描述草稿与具体限制",
+        "保持任务范围"
+      ],
+      "forbidden": [
+        "擅自修复实现",
+        "把风险描述成已解决",
+        "推送或发布草稿"
+      ],
+      "context": "合成上下文：已有审查报告指出兼容性风险，尚未修复。提供 diff 和验证结果。",
+      "fixture": null
     }
   ]
 }

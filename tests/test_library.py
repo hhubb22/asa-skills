@@ -269,9 +269,9 @@ class DocumentTests(unittest.TestCase):
 class EvaluationTests(TemporaryCase):
     def test_cases_are_unique_and_split(self):
         cases = json.loads((ROOT / "evals/cases.json").read_text())["cases"]
-        self.assertEqual(len(cases), 33)
-        self.assertEqual(len({x["id"] for x in cases}), 33)
-        self.assertEqual(sum(x["split"] == "holdout" for x in cases), 11)
+        self.assertEqual(len(cases), 48)
+        self.assertEqual(len({x["id"] for x in cases}), 48)
+        self.assertEqual(sum(x["split"] == "holdout" for x in cases), 16)
 
     def test_trigger_queries_cover_known_skills(self):
         data = json.loads((ROOT / "evals/triggers.json").read_text())["skills"]

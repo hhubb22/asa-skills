@@ -1,10 +1,10 @@
 {
   "format_version": 1,
-  "reviewed_on": "2026-10-06",
+  "reviewed_on": "2026-10-07",
   "note": "git_blob_sha 标识实际参考文本；不是 commit SHA。observed_heads 是制作时另行读取的默认分支头，不断言所有参考 blob 均来自该头。没有复制上游完整正文或脚本。",
   "observed_heads": {
     "warpdotdev/common-skills": "b811c24365ae505bfc9646458957b886e29110b5",
-    "mattpocock/skills": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d"
+    "mattpocock/skills": "6fd947921b935b7e1e69293a200400f0fdd5c15f"
   },
   "skills": {
     "work": [
@@ -84,6 +84,13 @@
         "git_blob_sha": "9b97707e19ef1f590aada356f2b3f6bb881f91be",
         "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/9b97707e19ef1f590aada356f2b3f6bb881f91be",
         "relation": "术语与决策维护；保留别名、正式语义需确认"
+      },
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/domain-modeling/SKILL.md",
+        "git_blob_sha": "a4438c6879c517d1a08e2b5fbca049b632688dfe",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/a4438c6879c517d1a08e2b5fbca049b632688dfe",
+        "relation": "默认词汇表命名 GLOSSARY.md；保留已有项目路径，迁移时同步引用并保持定义"
       }
     ],
     "handoff": [
@@ -118,6 +125,13 @@
         "git_blob_sha": "bbf1dace5f5aa98c9b50fed71e436461f1661d4f",
         "content_url": "https://api.github.com/repos/warpdotdev/common-skills/git/blobs/bbf1dace5f5aa98c9b50fed71e436461f1661d4f",
         "relation": "最小规则修改与归因；补版本不确定与保留样本"
+      },
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/retro/SKILL.md",
+        "git_blob_sha": "12149acf2dd23b4514dec57b04a6293eaa1352fa",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/12149acf2dd23b4514dec57b04a6293eaa1352fa",
+        "relation": "会话复盘的导航、自动检查、工具与信息获取维度；中文重写，沿用显式样本范围、候选补丁和人工选择"
       }
     ],
     "align": [
@@ -146,6 +160,15 @@
         "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/1b929e29fb519c26b500d3eda744177986883ac8",
         "relation": "反馈回路优先的分阶段调试；回路清单改为网络设备场景，增加实验室请求与密钥脱敏"
       }
+    ],
+    "write-pr": [
+      {
+        "repository": "mattpocock/skills",
+        "path": "skills/engineering/pr/SKILL.md",
+        "git_blob_sha": "84dd4fb2f068e9f6282690235d20dd505b418119",
+        "content_url": "https://api.github.com/repos/mattpocock/skills/git/blobs/84dd4fb2f068e9f6282690235d20dd505b418119",
+        "relation": "借鉴改动说明、前后证据与回退影响；中文重写，加入项目模板、双份材料、差异基线与按需 HTML"
+      }
     ]
   },
   "additional_influences": [
@@ -161,6 +184,11 @@
       "path": "pstack/skills/poteto-mode/SKILL.md",
       "relation": "仅借鉴入口按任务选择方法的概念；未复制代码或正文，未固定该文件版本",
       "url": "https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/SKILL.md"
+    },
+    {
+      "author": "Thariq",
+      "url": "https://x.com/trq212/status/2052809885763747935",
+      "relation": "仅借鉴用 HTML 解释 PR 的概念；未复制文章正文、示例 HTML、脚本或样式"
     }
   ]
 }

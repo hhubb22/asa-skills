@@ -20,11 +20,12 @@
 | `lab-request` | 本库新增；为隔离的实验室写验证需求单（验证什么、怎样算通过、带回什么），判定回传结果；执行方式由执行者决定 |
 | `research` | Matt 一手证据方法；区分事实、推断和未知，不依赖后台 Agent |
 | `code-review` | Matt 双路径审查；明确基线与工作区覆盖，只审查；修复交给 implement-specs |
+| `write-pr` | Matt PR + Thariq HTML 说明思路；项目模板优先，正式 message 与审核说明共用差异基线 |
 | `wait-what` | Matt；暂停新增操作，重新对齐并纠正可能的误解 |
 | `domain-modeling` | Matt；维护术语与重要决定，保留标准/SDK/历史别名 |
 | `handoff` | Matt；引用已有产物，保留基线、证据和授权，不复制整段聊天 |
 | `to-questionnaire` | Matt；向真正的知情者收集事实与决定，不自动发送 |
-| `skill-doctor` | Warp；最小有据改动，移除调用率评分，增加版本与保留样本核查 |
+| `skill-doctor` | Warp + Matt retro；复盘指定会话中的 skills、工具与开发环境，提出最小有据改进并检查回归 |
 | `write-tr` | 本库新增；按公司 TR1/TR2/TR3 模板起草评审文档，人填字段保留占位，工程文档按 SR/AR 追溯 |
 
 每个 skill 的 frontmatter `description` 就是它的触发说明；本仓库不维护另一份目录文件。所有 skill 只使用 Agent Skills 规范中的标准字段，不附带宿主专用的配置文件；宿主根据 description 自动选用，也可以显式调用。具体上游路径、Git blob 标识和改动说明见 [upstream.lock.json](upstream.lock.json)；许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。这不是上游官方分发包。
@@ -41,7 +42,7 @@ npx skills add hhubb22/asa-skills --list
 npx skills add hhubb22/asa-skills
 
 # 核心：任何项目都适用，安装到用户级目录并指定 Agent
-npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
+npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill write-pr --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
 
 # 扩展：公司 TR 评审流程与隔离实验室（开发侧）
 npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
@@ -70,6 +71,7 @@ npx skills add /path/to/asa-skills --skill work -g
 使用 work 处理这个特性：先查清现状，只交付设计，不改代码。
 按已确认的设计实施，完成必要验证；不提交、不推送。
 使用 code-review 检查当前修改，包含未跟踪文件；只报告。
+用 write-pr 为当前修改写 MR message，按项目模板填写，再生成 HTML 审核说明。
 wait-what。你刚刚为什么决定改变接口？先重新说明依据。
 skill-doctor：只复盘我指定的这两个会话，提出补丁，不应用。
 ```
@@ -95,9 +97,10 @@ python3 -m unittest discover -s tests -v
 写作模板与示例放在相关 skill 的 assets/、references/。它们不是自动创建的项目文件。已有需求、设计和术语位置优先；没有内容就不创建整套文档。
 
 - [Astra 适配依据](docs/ASTRA-ALIGNMENT.md)
+- [PR/MR 材料与 HTML 审核说明](docs/WRITE-PR.md)
 - [skill-doctor 使用与隐私](docs/SKILL-DOCTOR.md)
 - [使用指南](docs/GUIDE.md)
-- [33 个行为试跑案例与触发测试](evals/README.md)
+- [48 个行为试跑案例与触发测试](evals/README.md)
 - [实际验证与尚未验证范围](docs/VALIDATION.md)
 
 本库已进行本地脚本与结构检查，但没有在真实 Codex、Pi、Cursor 或 Claude Code 会话里做行为 A/B，也没有真实的触发率、质量或性能数据。案例状态保持 not_run，安装后应使用真实任务核对。

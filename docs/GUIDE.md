@@ -10,7 +10,7 @@
 - **改出来的东西不敢用**：没有设计、没有验证，出了问题不知道从哪查。
 - **知道概念，落不了地**：听说过"先写规格再写代码"，但不知道每一步具体怎么做、什么时候可以跳过。
 
-这套 skills 把一条可执行的工作流拆成 14 个通用核心能力，另有 2 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
+这套 skills 把一条可执行的工作流拆成 15 个通用核心能力，另有 2 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
 
 ## 四个核心概念
 
@@ -60,7 +60,7 @@ align   write-product-spec  write-tech-spec  to-tasks  implement-specs  code-rev
 npx skills add hhubb22/asa-skills --list
 
 # 核心：任何项目都适用
-npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
+npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill write-pr --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
 
 # 扩展：公司 TR 评审流程与隔离实验室（开发侧）
 npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
@@ -115,10 +115,30 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 这是 LAB-<特性>-01 的回传结果：<粘贴>。判断是否通过
 ```
 
+**准备 PR/MR**
+
+```text
+用 write-pr 为当前修改写 MR message，采用 PROJECT.md 中的模板，再生成给审核者看的 HTML 说明
+```
+
+正式 message 沿用项目模板；HTML 解释复杂改动、证据和审阅重点。两份材料放在过程区，创建和上传远端材料按已有授权执行。详见 [PR/MR 材料](WRITE-PR.md)。
+
 **准备 TR 评审**
 
 ```text
 用 write-tr 根据 PRODUCT.md 和现有代码起草 TR1
+```
+
+**复盘异常会话**
+
+```text
+用 skill-doctor 复盘当前会话中的反复失败、工具低效或压缩后丢失要求，提出候选补丁，不应用
+```
+
+**整理术语**
+
+```text
+用 domain-modeling 整理 <术语与冲突>，已有术语表沿用原路径，没有约定时使用 GLOSSARY.md
 ```
 
 **换会话继续**
@@ -139,7 +159,7 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 
 **支持哪些工具？** 遵循标准 SKILL.md 格式的 Agent 都能读取。已按文档核对 Codex、Pi、Cursor；其他工具请先试装。
 
-**效果有数据吗？** 还没有。仓库里有 33 个行为案例和 160 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
+**效果有数据吗？** 还没有。仓库里有 48 个行为案例和 170 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
 
 ## 推广分享大纲
 

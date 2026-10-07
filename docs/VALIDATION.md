@@ -1,5 +1,14 @@
 # 验证记录
 
+2026-10-07（macOS/Python 3.14.6）：新增 write-pr，扩展 skill-doctor，并将 domain-modeling 的默认术语表与模板改为 GLOSSARY 命名。
+
+- `python3 tools/check.py`：17 个 skills 的结构、引用、自包含依赖、共享副本与来源记录检查通过。
+- `python3 -m unittest discover -s tests -v`：37 项单元测试通过。
+- skill-creator 的 `quick_validate.py`：write-pr 的 frontmatter、命名与格式通过。校验依赖安装在过程区的独立 Python 环境中。
+- `python3 tools/prepare_eval.py --split all`：准备了 48 个案例；模型运行次数为 0。170 条触发测试仅完成数据结构检查。
+- 本会话基于仓库实际修改生成了正式 message 和独立 HTML 审核说明。使用 ego-browser 在 1280px 桌面宽度与 390px 窄屏下检查布局、导航、代码折叠和可读性；修正示例流程图的窄屏文字尺寸后通过。页面无需外部脚本或样式，正文没有横向溢出，长代码在代码区域滚动。
+- 此次材料生成是单次手动试用；48 个合成行为案例仍为 not_run。没有进行独立宿主的触发测试或行为 A/B，尚不能证明触发可靠性或任务质量提升。
+
 2026-10-06 第六次（Linux/Python 3.13.16）：v0.2.5 按外部审查修正四处规则冲突。`check.py` 与单元测试通过；`git diff HEAD` 的覆盖范围在临时仓库中实测确认。仍未在真实宿主中运行。
 
 2026-10-06 第五次（Linux/Python 3.13.16）：v0.2.4 移除全部 `agents/openai.yaml`，所有 skill 只保留规范字段；触发测试扩展到 16 个 skill。`check.py` 与单元测试通过；仍未在真实宿主中运行。
@@ -12,9 +21,9 @@
 
 2026-10-06（Linux/Python 3.13.16）：新增 write-tr 后，`check.py` 对 12 个 skills 通过，36 项单元测试通过；测试中的 skill 与案例数量随之更新，upstream.lock.json 改为允许没有上游记录的新增 skill。write-tr 没有在真实宿主中试跑。
 
-最近执行：2026-09-13，macOS 27.0，Python 3.14.7。首版（0.1.0，2026-09-12）在 Linux/Python 3.13.5 下执行过等价检查。
+首版详细记录：2026-09-13，macOS 27.0，Python 3.14.7。首版（0.1.0，2026-09-12）在 Linux/Python 3.13.5 下执行过等价检查。
 
-## 实际执行
+## 首版实际执行
 
 - `python3 tools/check.py`：11 个 skills 的标准字段、目录名、相对引用、自包含依赖、生成副本、upstream.lock.json 与目录一致性和 Python 语法检查通过。
 - `python3 -m unittest discover -s tests -v`：36 项测试通过，覆盖独立复制、引用失效、共享文件漂移、过期 lock 记录、无上游记录的新增 skill、评测准备和收集器行为。
@@ -24,7 +33,7 @@
 
 ## 未执行或不能据此证明
 
-没有调用真实 Astra、Codex、Pi 或 Cursor 进行行为 A/B，没有访问用户真实项目和历史会话。22 个案例提供后续试跑输入，不包含通过率。
+没有调用独立 Astra、Codex、Pi 或 Cursor 进行行为 A/B。48 个合成案例提供后续试跑输入，不包含通过率；本会话的实际材料生成试用记录见上方。
 
 宿主目录和基本调用方式按官方文档核对，未进行端到端宿主安装测试。`npx skills add`/`update`/`remove` 的行为由该 CLI 负责，本库不再验证安装冲突、备份或回滚。
 

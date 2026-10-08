@@ -1,6 +1,6 @@
 # Asa Skills
 
-一套独立维护、按任务选用的个人 Agent skills，通过 [`npx skills`](https://github.com/vercel-labs/skills) 安装与更新。以 Warp 与 Matt 的工作方法为参考，重新编写中文指令和配套材料；设计文档采用具体场景、真实取舍和可验证约定。`work` 给出一条默认主路径（对齐 → 规格 → 设计 → 拆分 → 实施 → 审查），每一步都有跳过条件，不是必经流水线。
+一套独立维护、按任务选用的个人 Agent skills，通过 [`npx skills`](https://github.com/vercel-labs/skills) 安装与更新。以 Warp 与 Matt 的工作方法为参考，重新编写中文指令和配套材料；设计文档采用具体场景、真实取舍和可验证约定。`work` 给出一条默认主路径（对齐 → 快速验证 → 规格 → 设计 → 拆分 → 实施 → 审查），每一步都有跳过条件，不是必经流水线。
 
 第一次使用请看 [使用指南](docs/GUIDE.md)。
 

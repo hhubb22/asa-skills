@@ -1,5 +1,7 @@
 # 验证记录
 
+2026-10-08（macOS/Python 3.14.6）：v0.2.6 只改使用指南和 README 的说明文字。`check.py` 的 17 个 skills 检查与 37 项单元测试通过；仍未在真实宿主中运行。
+
 2026-10-07（macOS/Python 3.14.6）：新增 write-pr，扩展 skill-doctor，并将 domain-modeling 的默认术语表与模板改为 GLOSSARY 命名。
 
 - `python3 tools/check.py`：17 个 skills 的结构、引用、自包含依赖、共享副本与来源记录检查通过。

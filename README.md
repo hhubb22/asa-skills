@@ -14,8 +14,8 @@
 | `align` | Matt grilling 改写；先结构化复述，问题只限阻塞项，最多 2 轮 |
 | `write-product-spec` | Warp；以可观察行为为核心，不编造需求或强制创建工单 |
 | `write-tech-spec` | Warp + Rust RFC 论述；先调查，再说明变化、取舍与验证 |
-| `to-tasks` | Matt to-tickets 改写；纵向切片、依赖与验证方式，输出到过程区 |
-| `issue-tracking` | 本库新增；通过已连接的 Linear MCP 查询工单、检查依赖、同步进度与验收证据，离线时仍可本地工作 |
+| `to-tasks` | Matt to-tickets 改写；按可验收的纵向切片拆分，local 模式写 TASKS.md，issue 模式获准后创建工单 |
+| `issue-tracking` | 本库新增；借助 Linear MCP 读取任务、检查依赖，在已授权范围内同步进度与验收证据 |
 | `implement-specs` | Warp；沿用已有明确依据，在授权范围内连续实施与验证 |
 | `diagnose-bugs` | Matt diagnosing-bugs 改写；反馈回路优先，网络设备场景的回路清单 |
 | `lab-request` | 本库新增；为隔离的实验室写验证需求单（验证什么、怎样算通过、带回什么），判定回传结果；执行方式由执行者决定 |
@@ -63,7 +63,15 @@ npx skills add /path/to/asa-skills --skill work -g
 
 更新、查看与移除同样交给 CLI：`npx skills update`、`npx skills list`、`npx skills remove <name>`。CLI 默认以符号链接接入各 Agent 目录，`--copy` 改为独立复制。
 
-核心 skill 不绑定领域。项目差异写在过程区的项目配置 `PROJECT.md` 里，模板随 `work` 一起安装，PICOS 示例见 [examples/project-config-picos.md](examples/project-config-picos.md)。扩展 skill 只有在项目配置声明了对应内容时才进入主路径。
+核心 skill 不绑定领域。项目配置优先读取产品仓库的 `.agents/PROJECT.md`；无仓库配置时仍兼容旧版 `~/.agents/work/<项目>/PROJECT.md`。模板随 `work` 安装；示例见 [PICOS 本地模式](examples/project-config-picos.md)和 [Baton Linear 模式](examples/project-config-linear.md)。扩展 skill 只有在项目配置声明了对应内容时才进入主路径。
+
+## 任务管理模式
+
+- **local（默认）**：无需工单平台，过程区保存 `TASKS.md`、按需保存对齐/进度/交接文件，适合隔离环境和旧项目。
+- **issue（当前适配 Linear）**：Issue 保存任务、依赖、状态和本次验收标准；Git 保存工程规格、代码、测试与已确认设计。`align` / `to-tasks` / `implement-specs` / `handoff` 不再默认写用户目录下的过程文件；需要长期保存的工程事实进入 Git，远端决策与进度经授权写入工单。
+- MCP 临时不可用时，仍可进行已授权的本地实现与验证，但远程操作标为待同步；不会默默把 Linear 项目改成 local 模式。新建/批量更改工单和改变需求需要明确授权。
+
+`work` 负责按任务选择所需 Skills，`issue-tracking` 负责远端读写，`code-review` 独立审查。配置中写明实际 Team、Project 和已授权的进度更新范围，切勿把 Skill 指令当作工具权限沙箱。
 
 每个 `skills/<name>/` 目录自包含：共享参考、模板与许可已包含在内，不能只复制 SKILL.md。只安装 work 不会自动安装它能选择的其他能力。已经从 Warp/Matt 或其他来源装过同名 skill 时先核对，不要同时保留两个版本后指望宿主自动合并。
 

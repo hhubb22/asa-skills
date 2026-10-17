@@ -1,5 +1,7 @@
 # 验证记录
 
+2026-10-17：更新双模式工作流与 Linear 集成。通过 GitHub 读取原始文件并校验每个修改后的 Skill frontmatter、正文行数、description 预算、关联文档与合成测试结构。由于当前环境没有完整的可执行仓库检出，未运行 `python3 tools/check.py` 或完整单元测试；也未在真实 Pi/Codex + Linear 环境完成行为试跑。后续应使用真实环境核查项目模式切换、工单授权、失败恢复、生成引用一致性和跨会话恢复。
+
 2026-10-08（macOS/Python 3.14.6）：v0.2.6 只改使用指南和 README 的说明文字。`check.py` 的 17 个 skills 检查与 37 项单元测试通过；仍未在真实宿主中运行。
 
 2026-10-07（macOS/Python 3.14.6）：新增 write-pr，扩展 skill-doctor，并将 domain-modeling 的默认术语表与模板改为 GLOSSARY 命名。

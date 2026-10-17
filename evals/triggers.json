@@ -36,18 +36,18 @@
     },
     "implement-specs": {
       "should_trigger": [
-        "TECH.md 已经确认了，开始写代码吧",
-        "按 TASKS.md 做 T03",
-        "照刚才定的方案实现，跑完测试告诉我",
-        "设计没问题，实现一下 AR 汇总里的前两条",
-        "把评审通过的接口改动落实到代码"
+        "按照已批准的 PS-42 开始实现并完成测试",
+        "根据 PRODUCT.md 的约束修复实现，完成验证",
+        "local 模式按 TASKS.md 的 T03 实施",
+        "实现这个接口变更并补充回归测试",
+        "按这条已明确的需求完成代码和文档同步"
       ],
       "should_not_trigger": [
-        "这个需求怎么设计比较好？（write-tech-spec）",
-        "帮我拆一下任务（to-tasks）",
-        "先别写代码，帮我理解一下需求（align）",
-        "这个测试为什么失败？（diagnose-bugs）",
-        "看看这个 PR 有没有问题（code-review）"
+        "把现有工单按依赖排序（issue-tracking）",
+        "先把新需求澄清清楚（align）",
+        "把已批准设计拆成几个工单（to-tasks）",
+        "只对 PR 做独立审查（code-review）",
+        "核实这个错误是否能复现（diagnose-bugs）"
       ]
     },
     "research": {
@@ -148,18 +148,18 @@
     },
     "work": {
       "should_trigger": [
-        "这个特性从头到尾按流程推进吧",
-        "用完整工作流做这个需求",
-        "我不知道该从哪一步开始，帮我安排",
-        "这件事接下来该用哪个 skill？",
-        "按主路径把这个功能做完"
+        "按 Baton 的 Linear 项目工单走完整开发和验收流程",
+        "想法、口头需求从头到尾按 work 主路径推进",
+        "我不知道这个需求该用哪些技能，你来安排",
+        "按项目配置选择合适的流程，从需求推进到交付",
+        "有 Issue 和已批准设计，帮我组织实施和审查"
       ],
       "should_not_trigger": [
-        "这个函数为什么返回空？（diagnose-bugs）",
-        "帮我审查一下这个 MR（code-review）",
-        "把这个变量改个名（直接完成）",
-        "复述一下我的需求（align）",
-        "解释一下 RFC 里这一节（research）"
+        "查看 PS-42 的状态和依赖（issue-tracking）",
+        "审查当前 PR 的代码差异（code-review）",
+        "只需把函数参数重命名（直接完成）",
+        "这是日志，帮我定位 bug（diagnose-bugs）",
+        "我没理解你为什么改变设计（wait-what）"
       ]
     },
     "align": {
@@ -180,34 +180,34 @@
     },
     "to-tasks": {
       "should_trigger": [
-        "设计确认了，拆一下任务",
-        "这个特性太大，分成几个能独立验证的小任务",
-        "按 AR 汇总拆成任务清单",
-        "拆分一下，好几个人一起做",
-        "这活得分好几个会话做，帮我规划任务"
+        "设计已确认，在 local 模式下拆成 TASKS.md",
+        "Baton 是 issue 模式，先给我拆成 Linear 工单草案",
+        "把已批准的跨模块设计拆成可分别验收的任务",
+        "要分给几个 Agent 开发，规划任务与依赖",
+        "这个特性要跨会话完成，帮我规划纵向切片"
       ],
       "should_not_trigger": [
-        "开始做 T01（implement-specs）",
-        "今天的待办有哪些？（直接回答）",
-        "设计一下模块划分（write-tech-spec）",
-        "估一下工作量（直接回答）",
-        "写项目排期（直接完成）"
+        "按 PS-42 开始写代码和跑测试（implement-specs）",
+        "查询项目中有哪些可以开始的 Issue（issue-tracking）",
+        "解释当前架构中的进程划分（research）",
+        "直接审查这个 PR（code-review）",
+        "请把现有 Issue 的状态改为 In Review（issue-tracking）"
       ]
     },
     "handoff": {
       "should_trigger": [
-        "上下文快满了，写个交接，我换新会话继续",
-        "我要换到另一台机器继续，记录一下当前状态",
-        "把进度交给另一个 Agent 接手",
-        "明天接着做，先把现状整理成交接文件",
-        "切换会话前保存一下进展和下一步"
+        "切换会话前交接 PS-42 的远端和 Git 状态",
+        "工作区有未提交内容，写个必要的交接",
+        "上下文快满了，整理恢复任务需要的最少信息",
+        "明天换机器继续开发，保留当前证据与授权",
+        "Local 模式写 HANDOFF.md 交给下一会话"
       ],
       "should_not_trigger": [
-        "写一份项目周报（直接完成）",
-        "总结一下这次会话聊了什么（直接回答）",
-        "生成 MR 描述（直接完成）",
-        "记录一下这个设计决策（domain-modeling）",
-        "更新任务清单的状态（to-tasks）"
+        "写 PR 描述（write-pr）",
+        "检查当前 Issue 的依赖（issue-tracking）",
+        "把一个新需求写进 Linear（issue-tracking）",
+        "总结这份技术文档（直接回答）",
+        "继续当前已授权的实施（implement-specs）"
       ]
     },
     "wait-what": {
@@ -276,18 +276,18 @@
     },
     "issue-tracking": {
       "should_trigger": [
-        "用 Linear MCP 查询 PS-42 的当前状态和阻塞关系",
-        "把这个任务的真实测试结果更新到 Linear 工单里",
-        "帮我在 Baton 项目里找到下一个没有依赖阻塞的 Issue",
-        "我批准创建这个 Linear Issue，帮我写入并返回链接",
-        "提交审查后，检查当前 Linear 工单能否标记为 Done"
+        "只读取 Baton 项目 PS-42 的工单状态与阻塞",
+        "我已授权，创建这条 Linear Issue 并返回链接",
+        "把已完成的验证结果附到当前 Linear 工单",
+        "确认当前 Issue 的审查结果并按授权更新状态",
+        "在 Linear 里检查是否有重复工单和依赖关系"
       ],
       "should_not_trigger": [
-        "我给你一个 Issue 需求，先确认代码应当怎么改（align）",
-        "按 PS-42 的验收标准直接实现并测试（implement-specs）",
-        "帮我评审这个 PR 的代码差异（code-review）",
-        "把已经确认的技术设计拆成任务清单（to-tasks）",
-        "Linear MCP 的 OAuth 授权机制是什么？（research）"
+        "拿 PS-42 的要求直接实现功能（implement-specs）",
+        "根据设计草案拆分纵向任务但先不写工单（to-tasks）",
+        "独立审查 PS-42 对应 PR 的代码（code-review）",
+        "解释一下 Linear MCP 的技术实现（research）",
+        "用户只想记录一份本地草稿（直接完成）"
       ]
     }
   }

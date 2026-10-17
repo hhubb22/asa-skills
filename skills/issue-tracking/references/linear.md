@@ -53,16 +53,17 @@ Linear 官方 MCP 使用 `https://mcp.linear.app/mcp`；只读服务为 `https:/
 
 ## 项目启用示例
 
-若项目长期采用 Linear，可在过程区的 `PROJECT.md` 增加以下约定。这里的 Baton / Personal 仅是示例，其他项目必须重新定位。
+若项目长期采用 Linear，在 Git 仓库根目录的 `.agents/PROJECT.md` 声明 issue 模式与实际归属。下面的 Baton / Personal 仅是示例，其他项目须重新定位；老项目的用户目录 `PROJECT.md` 在仓库没有配置时仍可兼容读取。
 
 ```markdown
-## 工单追踪
-- 平台：Linear MCP
+## 任务管理
+- 模式：issue
+- 提供方：Linear MCP
 - Team：Personal（PS）
 - Project：Baton
-- 项目级任务权威记录：Linear Issue
-- 允许的日常写入：对已获准执行的当前 Issue 同步进度与验收证据
-- 额外授权：创建工单、批量变更、修改需求或优先级
+- 任务权威来源：Linear Issue
+- 当前任务进展同步：在用户已授权的当前任务内更新状态与证据
+- 新建或批量变更工单：逐次授权
 ```
 
-本条只为当前项目声明默认工作方式；用户指令和宿主权限始终优先。现有 `to-tasks` 等 Skill 仍可能在过程区写本地任务清单，须单独改造后才能完全切换为 Linear 驱动。
+项目配置帮助定位任务与记录已有授权，不能独立授予新的写入权限。issue 模式下 `to-tasks` 应先产出草案，获准后才创建 Issue；`implement-specs` 只同步当前任务的真实进展，`handoff` 优先从 Linear + Git 恢复，不必维护并行的本地 TASKS.md。

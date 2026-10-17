@@ -10,7 +10,7 @@
 - **改出来的东西不敢用**：没有设计、没有验证，出了问题不知道从哪查。
 - **知道概念，落不了地**：听说过"先写规格再写代码"，但不知道每一步具体怎么做、什么时候可以跳过。
 
-这套 skills 把一条可执行的工作流拆成 15 个通用核心能力，另有 2 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
+这套 skills 包含 16 个通用能力（包括可选的 Linear 工单集成），另有 2 个面向公司评审流程和隔离实验室的扩展。每个能力是一份中文指令，装进你常用的 Agent 后，用一句话就能调用。
 
 ## 四个核心概念
 
@@ -20,11 +20,11 @@
 
 | 步骤 | skill | 跳过条件 |
 |---|---|---|
-| 1. 对齐 | `align` | 每次都做 |
+| 1. 对齐 | `align` | 已有明确的 Issue 验收条件时只核对新的歧义，不强制生成文档 |
 | 2. 快速验证 | `work` 的一条路径 | 讨论能定下来就跳过；做了就带着结论回到第 1 步 |
 | 3. 行为规格 | `write-product-spec` | 局部改动、行为明确时跳过 |
 | 4. 技术设计 | `write-tech-spec` | 不跨模块、不改接口、没有取舍时跳过 |
-| 5. 拆分任务 | `to-tasks` | 一个会话能做完就跳过 |
+| 5. 拆分任务 | `to-tasks` | 一个会话能做完就跳过；issue 模式获准后才创建工单 |
 | 6. 实施 | `implement-specs` | 每次都做 |
 | 7. 审查 | `code-review` | 每次都做；需要 PR/MR 描述时接 `write-pr` |
 
@@ -34,8 +34,12 @@
 
 | 类型 | 内容 | 放在哪里 |
 |---|---|---|
-| 长期文档 | 行为规格、技术设计、ADR、术语表 | 仓库 `specs/<特性>/`，与代码同一提交 |
-| 过程文件 | 需求对齐、任务清单、进度、交接、实验室请求、TR 草稿 | `~/.agents/work/<项目>/<特性>/`，不进仓库 |
+| 长期工程文档 | 行为规格、技术设计、ADR、术语表 | Git 仓库 §specs/<特性>/§，与代码同一提交 |
+| local 模式任务与过程文件 | 任务清单、进度、交接、评审草稿 | 默认 §~/.agents/work/<项目>/<特性>/§，不进产品仓库 |
+| issue 模式项目级任务 | Issue、验收条件、状态、依赖、阶段证据 | Linear；相关设计/代码/测试存 Git |
+| issue 模式临时材料 | 未提交状态、隔离实验记录、HTML 等 | 仅在确有需要时保存到指定或临时非跟踪路径，不默认写用户目录 |
+
+issue 模式下先核对最新 Issue、依赖和 Git 状态，获准实施后开发、验证、独立审查，由主 Agent 核验后更新 Done；MCP 不可用时保留待同步事项。
 
 **3. 授权边界**
 
@@ -45,7 +49,7 @@
 
 **4. 项目配置**
 
-核心 skill 不绑定任何领域。每个项目的差异，例如评审文档是什么、需求怎么编号、有没有隔离的验证环境，写在过程区的 `PROJECT.md` 里。没有这份文件时按通用默认工作。
+核心 skill 不绑定领域。项目配置优先放在 Git 仓库的 `.agents/PROJECT.md`，没有时兼容旧项目的 `~/.agents/work/<项目>/PROJECT.md`。声明 `模式：issue` 且提供实际 Team / Project 才使用工单模式；没有配置时默认 local，不强制创建 PROJECT.md。
 
 ## 开始前准备
 
@@ -53,8 +57,8 @@
 
 1. 准备环境：Node.js，能访问 GitHub 和 npm。在公司网络下先试一次安装。
 2. 安装核心 skill；做 PICOS 项目的同事再装扩展（命令见下）。
-3. 为当前项目创建 `~/.agents/work/<项目>/PROJECT.md`。模板在 `work` 的 assets 目录里；PICOS 项目可以直接复制仓库中的 [示例](../examples/project-config-picos.md)。
-4. （可选）把 `~/.agents/work/` 初始化为个人 Git 仓库，保留过程文件的历史。
+3. 需要项目约定时，将 `work/assets/PROJECT.template.md` 调整后保存到产品仓库 `.agents/PROJECT.md`；旧的本地配置无需迁移。PICOS 可参考 [local 示例](../examples/project-config-picos.md)，Baton 可参考 [Linear 示例](../examples/project-config-linear.md)。
+4. 使用 Linear 时，先在 Agent 宿主中连接 Linear MCP 并确认权限。没有工单系统的项目继续使用过程区，是否单独备份由项目实际需要决定。
 
 **团队约定**
 
@@ -68,6 +72,9 @@ npx skills add hhubb22/asa-skills --list
 
 # 核心：任何项目都适用
 npx skills add hhubb22/asa-skills --skill work --skill align --skill write-product-spec --skill write-tech-spec --skill to-tasks --skill implement-specs --skill code-review --skill write-pr --skill diagnose-bugs --skill research --skill domain-modeling --skill handoff --skill wait-what --skill to-questionnaire --skill skill-doctor -g -a codex -a cursor
+
+# Linear 项目：额外安装工单操作能力（宿主需已连接 Linear MCP）
+npx skills add hhubb22/asa-skills --skill issue-tracking -g
 
 # 扩展：公司 TR 评审流程与隔离实验室（开发侧）
 npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
@@ -86,8 +93,16 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 （确认后）根据 ALIGN.md 写行为规格
 （需要时）根据 PRODUCT.md 写技术设计
 用 to-tasks 拆任务
-按 TASKS.md 实现 T01，跑完测试告诉我结果
+local 模式：按 TASKS.md 实现 T01，跑完测试告诉我结果
 用 code-review 检查当前修改，包括未跟踪文件
+```
+
+**Linear 项目，按工单推进**
+
+```text
+用 work 处理 Baton 项目中 PS-123：先核对 Issue 的验收标准与阻塞关系。
+在已获准范围内实施与验证；需要时独立 code-review。
+结果记录到当前 Issue，但不要自行扩大任务范围或修改其他工单。
 ```
 
 **新特性，已经有 TR**
@@ -166,7 +181,7 @@ npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
 
 **支持哪些工具？** 遵循标准 SKILL.md 格式的 Agent 都能读取。已按文档核对 Codex、Pi、Cursor；其他工具请先试装。
 
-**效果有数据吗？** 还没有。仓库里有 48 个行为案例和 170 条触发测试，尚未在真实环境中跑过。欢迎试用后反馈。
+**效果有数据吗？** 还没有。仓库里有 48 个合成行为案例及每个 Skill 的触发测试，尚未在真实环境完成行为对照。请以实际宿主、权限、远端状态和测试记录为依据。
 
 ## 推广分享大纲
 

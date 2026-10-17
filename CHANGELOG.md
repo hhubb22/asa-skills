@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — 2026-10-17
+
+- 新增仓库内 `.agents/PROJECT.md` 项目配置优先级，兼容旧的用户目录 PROJECT.md；local / issue 双模式保持清晰的任务权威来源。
+- issue 模式通过 Linear MCP 管理任务、依赖和进度；不默认创建本地 TASKS、PROGRESS、HANDOFF 或 ALIGN 文件，复杂临时产物按需保存。
+- 更新 work、align、to-tasks、implement-specs、code-review、handoff、issue-tracking 和 write-pr 的衔接边界、模板、示例及安装说明。
+- 补充跨会话恢复、MCP 断连、工单创建权限和配置冲突的合成试跑场景；真实 Agent 行为测试尚未进行。
+
 ## 0.2.6 — 2026-10-08
 
 - 使用指南：主路径改成七步表格，补上入口 `work`、快速验证和各步跳过条件；「会不会乱改代码」说明 skill 约定不是运行时沙箱，要靠宿主权限拦截。README 的主路径同步。

@@ -1,6 +1,11 @@
 # 项目配置：PICOS
 
-示例。复制到 `~/.agents/work/picos/PROJECT.md`，按实际情况修改。
+示例。现有 PICOS 项目可继续使用 `~/.agents/work/picos/PROJECT.md`；若团队允许把项目配置纳入版本控制，也可将调整后的文件放入仓库 `.agents/PROJECT.md`。两处只保留一份。
+
+## 任务管理
+
+- 模式：local
+- 无工单平台，沿用过程区的 `TASKS.md`；不要为切换模式自动迁移或创建任务。
 
 ## 外部评审文档
 

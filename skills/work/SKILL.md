@@ -63,6 +63,7 @@ license: MIT
 | 需要 | 选用 |
 |---|---|
 | 整理术语、概念关系或重要决策 | `domain-modeling` |
+| 读取或维护 Linear 工单、依赖、进度及验收记录 | `issue-tracking`（宿主已连接 Linear MCP 时） |
 | 向知情者收集缺失的事实或决定 | `to-questionnaire` |
 | 编写 PR/MR 描述或向审核者解释已有改动 | `write-pr` |
 | 复盘 Agent 行为、skill 质量、工具或开发环境 | `skill-doctor` |

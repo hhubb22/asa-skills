@@ -273,6 +273,22 @@
         "按确认设计修改代码（implement-specs）",
         "生成普通网页或 HTML 报告（对应任务能力）"
       ]
+    },
+    "issue-tracking": {
+      "should_trigger": [
+        "用 Linear MCP 查询 PS-42 的当前状态和阻塞关系",
+        "把这个任务的真实测试结果更新到 Linear 工单里",
+        "帮我在 Baton 项目里找到下一个没有依赖阻塞的 Issue",
+        "我批准创建这个 Linear Issue，帮我写入并返回链接",
+        "提交审查后，检查当前 Linear 工单能否标记为 Done"
+      ],
+      "should_not_trigger": [
+        "我给你一个 Issue 需求，先确认代码应当怎么改（align）",
+        "按 PS-42 的验收标准直接实现并测试（implement-specs）",
+        "帮我评审这个 PR 的代码差异（code-review）",
+        "把已经确认的技术设计拆成任务清单（to-tasks）",
+        "Linear MCP 的 OAuth 授权机制是什么？（research）"
+      ]
     }
   }
 }

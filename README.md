@@ -15,6 +15,7 @@
 | `write-product-spec` | Warp；以可观察行为为核心，不编造需求或强制创建工单 |
 | `write-tech-spec` | Warp + Rust RFC 论述；先调查，再说明变化、取舍与验证 |
 | `to-tasks` | Matt to-tickets 改写；纵向切片、依赖与验证方式，输出到过程区 |
+| `issue-tracking` | 本库新增；通过已连接的 Linear MCP 查询工单、检查依赖、同步进度与验收证据，离线时仍可本地工作 |
 | `implement-specs` | Warp；沿用已有明确依据，在授权范围内连续实施与验证 |
 | `diagnose-bugs` | Matt diagnosing-bugs 改写；反馈回路优先，网络设备场景的回路清单 |
 | `lab-request` | 本库新增；为隔离的实验室写验证需求单（验证什么、怎样算通过、带回什么），判定回传结果；执行方式由执行者决定 |
@@ -46,6 +47,9 @@ npx skills add hhubb22/asa-skills --skill work --skill align --skill write-produ
 
 # 扩展：公司 TR 评审流程与隔离实验室（开发侧）
 npx skills add hhubb22/asa-skills --skill write-tr --skill lab-request -g
+
+# Linear 工单管理（先在宿主中连接官方 Linear MCP）
+npx skills add hhubb22/asa-skills --skill issue-tracking -g
 
 # 只装部分
 npx skills add hhubb22/asa-skills --skill research --skill code-review

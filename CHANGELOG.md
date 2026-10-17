@@ -6,6 +6,8 @@
 - issue 模式通过 Linear MCP 管理任务、依赖和进度；不默认创建本地 TASKS、PROGRESS、HANDOFF 或 ALIGN 文件，复杂临时产物按需保存。
 - 更新 work、align、to-tasks、implement-specs、code-review、handoff、issue-tracking 和 write-pr 的衔接边界、模板、示例及安装说明。
 - 补充跨会话恢复、MCP 断连、工单创建权限和配置冲突的合成试跑场景；真实 Agent 行为测试尚未进行。
+- 共享约定：过程区按临时材料对待；工单、仓库文档和交接只引用换机器也能打开的位置，长期证据写结论、原件作为附件或进仓库，上传前排除工具 home、缓存和日志。防止迁移后工单引用开发机路径。
+- issue-tracking：local 迁移只搬内容不搬本机路径，删除本地材料前列出未上传的被引用材料；写入以接口返回确认，出错、超时或返回缺字段时才查询，不下载附件比对。新增案例 13、14。
 
 ## 0.2.6 — 2026-10-08
 
